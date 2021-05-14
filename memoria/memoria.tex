@@ -305,6 +305,7 @@
 \makeatletter
 \usepackage{xcolor}
 \newcommand{\tutor}[1]{\def\@tutor{#1}}
+\newcommand{\cotutor}[1]{\def\@cotutor{#1}}
 \newcommand{\course}[1]{\def\@course{#1}}
 \definecolor{cpardoBox}{HTML}{E6E6FF}
 \def\maketitle{
@@ -346,7 +347,7 @@
     \noindent\LARGE
     Presentado por \@author{}\\ 
     en Universidad de Burgos --- \@date{}\\
-    Tutor: \@tutor{}\\
+    Tutores: \@tutor{} y \@cotutor{}    
   }%
   \end{center}%
   \null
@@ -354,12 +355,16 @@
   }
 \makeatother
 
-\newcommand{\nombre}{Nombre del alumno} %%% cambio de comando
+\newcommand{\nombre}{Iván Iglesias Cuesta} %%% cambio de comando
+\newcommand{\titulo}{Uso de técnicas de aprendizaje no supervisado para la ayuda en videojuegos tipo MOBA}
+\newcommand{\nombretutor}{Jose Francisco Díez Pastor}
+\newcommand{\nombrecotutor}{César-Ignacio García Osorio}
 
 % Datos de portada
-\title{título del TFM}
+\title{\titulo}
 \author{\nombre}
-\tutor{nombre tutor}
+\tutor{\nombretutor}
+\cotutor{\nombrecotutor}
 \date{\today}
 
 \begin{document}
@@ -389,12 +394,14 @@
 
 
 
-\noindent D. nombre tutor, profesor del departamento de nombre departamento, área de nombre área.
+\noindent D. \nombretutor, profesor del departamento de nombre departamento, área de nombre área.
 
-\noindent Expone:
+\noindent D. \nombrecotutor, profesor del departamento de nombre departamento, área de nombre área.
 
-\noindent Que el alumno D. \nombre, con DNI dni, ha realizado el Trabajo final de Máster en Inteligencia de Negocio y Big Data en Entornos Seguros 
-          titulado título de TFM. 
+\noindent Exponen:
+
+\noindent Que el alumno D. \nombre, con DNI 45573756S, ha realizado el Trabajo final de Máster en Inteligencia de Negocio y Big Data en Entornos Seguros 
+          titulado \titulo. 
 
 \noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección del que suscribe, en virtud de lo cual se autoriza su presentación y defensa.
 
@@ -408,14 +415,14 @@ En Burgos, {\large \today}
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
 Vº. Bº. del Tutor:\\[2cm]
-D. nombre tutor
+D. \nombretutor
 \end{flushleft}
 \end{minipage}
 \hfill
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
 Vº. Bº. del co-tutor:\\[2cm]
-D. nombre co-tutor
+D. \nombrecotutor
 \end{flushleft}
 \end{minipage}
 \hfill
