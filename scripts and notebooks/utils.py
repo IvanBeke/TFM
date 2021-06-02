@@ -65,7 +65,6 @@ def call_with_retry(url: str, headers: dict, params: dict = {}, retries: int = 1
         response = response.json()
         return response
     else:
-        print(response.text)
         retry_after = int(response.headers['Retry-After'])
         time.sleep(retry_after)
         response = call_with_retry(url, headers, params, retries+1)
