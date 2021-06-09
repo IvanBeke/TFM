@@ -17,7 +17,7 @@ def build_url(region: str, base_url: str, endpoint: str, *params) -> str:
     str
         Full url to call
     """
-    return (f'https://{region}.{base_url}{endpoint.format(params)}')
+    return (f'https://{region}.{base_url}{endpoint.format(*params)}')
 
 
 def save_json(obj: dict, file: str) -> None:
@@ -28,8 +28,10 @@ def save_json(obj: dict, file: str) -> None:
     obj : dict
     file : dict
     """
-    with open(f'outputs/{file}', 'w+') as f:
-        json.dump(obj, f, indent=4)
+    filename = f'outputs/{file}'
+    if not os.path.exists(filename):
+        with open(filename, 'w+') as f:
+            json.dump(obj, f, indent=4)
 
 
 def load_json(file: str) -> dict:
