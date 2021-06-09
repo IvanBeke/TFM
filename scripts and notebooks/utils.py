@@ -1,7 +1,7 @@
 import json, requests, time, os
 import dill as pickle
 
-def build_url(region: str, base_url: str, endpoint: str) -> str:
+def build_url(region: str, base_url: str, endpoint: str, *params) -> str:
     """Build complete url to call.
 
     Parameters
@@ -9,13 +9,15 @@ def build_url(region: str, base_url: str, endpoint: str) -> str:
     region : str
     base_url : str
     endpoint : str
+    params : list
+        Additional parameters to complete the endpoint
 
     Returns
     -------
     str
         Full url to call
     """
-    return f'https://{region}.{base_url}{endpoint}'
+    return (f'https://{region}.{base_url}{endpoint.format(params)}')
 
 
 def save_json(obj: dict, file: str) -> None:
