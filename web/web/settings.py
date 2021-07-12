@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0(6xh$i0(m#ix#8(ct(nuj!&dbj@f#ky^-gmk#2v+#z1=nc%hu'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'clave-dev')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = []
 
@@ -37,9 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cassiopeia',
+    'django_extensions',
     'betterbuilds',
     'etl',
 ]
+
+CASSIOPEIA_RIOT_API_KEY = os.environ.get('RIOT_API_KEY')
+CASSIOPEIA_DEFAULT_REGION = os.environ.get('RIOT_API_REGION', 'EUW')
+CASSIOPEIA_PIPELINE = {
+    'Omnistone': {},
+    'DDragon': {},
+    'RiotAPI': {},
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

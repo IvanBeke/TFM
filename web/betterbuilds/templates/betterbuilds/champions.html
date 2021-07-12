@@ -1,0 +1,7 @@
+{% extends "betterbuilds/base.html" %}
+{% block content %}
+{% for champion in champions %}
+<img src="{{ champion.image.url }}"> {{ champion.name }}
+<br>
+{% endfor %}
+{% endblock %}

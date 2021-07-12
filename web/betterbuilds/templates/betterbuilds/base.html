@@ -20,7 +20,7 @@
         {% block body %} {% block navbar %}
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">BetterBuilds</a>
+                <a class="navbar-brand" href="{% url 'index' %}">BetterBuilds</a>
                 <button
                     class="navbar-toggler"
                     type="button"
@@ -37,16 +37,20 @@
                     id="navbarSupportedContent"
                 >
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% url 'index' as url %}
                         <li class="nav-item">
                             <a
-                                class="nav-link active"
-                                aria-current="page"
-                                href="#"
+                                class="nav-link {% if request.path == url %}active{% endif %}"
+                                href="{{ url }}"
                                 >Inicio</a
                             >
                         </li>
+                        {% url 'champions' as url %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Campeones</a>
+                            <a
+                                class="nav-link {% if request.path == url %}active{% endif %}"
+                                href="{{ url }}"
+                                >Campeones</a>
                         </li>
                     </ul>
                     <form class="d-flex">
