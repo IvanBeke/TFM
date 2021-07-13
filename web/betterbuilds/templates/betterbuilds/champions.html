@@ -1,7 +1,22 @@
 {% extends "betterbuilds/base.html" %}
 {% block content %}
-{% for champion in champions %}
-<img src="{{ champion.image.url }}"> {{ champion.name }}
-<br>
-{% endfor %}
+<div class="container py-4">
+    <div class="row">
+    {% for champion in champions %}
+        <div class="col-2">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img src="{{ champion.image.url }}" class="img-fluid rounded-start" alt="{{ champion.name }}">
+                    </div>
+                    <div class="col-8 card-body d-flex align-items-center">
+                        <h5 class="card-title">{{ champion.name }}</h5>
+                        <a href="{% url 'champion_builds' champion_id=champion.id %}" class="stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
 {% endblock %}
