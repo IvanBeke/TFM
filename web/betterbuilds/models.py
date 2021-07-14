@@ -1,3 +1,9 @@
-from django.db import models
+from djongo import models
 
-# Create your models here.
+class FrequentBuilds(models.Model):
+    champion = models.IntegerField()
+    type = models.CharField(max_length=25)
+    builds = models.JSONField()
+
+    class Meta:
+        db_table = 'frequent_builds'

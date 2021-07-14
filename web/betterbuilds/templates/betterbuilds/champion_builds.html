@@ -1,0 +1,21 @@
+{% extends "betterbuilds/base.html" %}
+{% block content %}
+<div class="container py-4">
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'champions' %}">Campeones</a></li>
+            <li class="breadcrumb-item active">{{ champion.name }}</li>
+        </ol>
+    </nav>
+    <div>
+        {% for build in frequent_build.builds %}
+        Esta elección se realiza el {{ build.support }}% de las partidas:
+            {% for item in build.items %}
+            <img src={{ item.image.url }}>
+            {% endfor %}
+            <br>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
