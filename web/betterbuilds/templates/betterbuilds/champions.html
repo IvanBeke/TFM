@@ -7,9 +7,12 @@
             <li class="breadcrumb-item active">Campeones</li>
         </ol>
     </nav>
-    <div class="row">
+    <div class="mb-3">
+        <input type="text" class="form-control" id="search-champion" placeholder="Busca un campeón">
+    </div>
+    <div class="row" id="champion-list">
     {% for champion in champions %}
-        <div class="col-3">
+        <div class="col-3" data-champion="{{ champion.name }}">
             <div class="card mb-3">
                 <div class="row g-0">
                     <div class="col-4">
@@ -26,3 +29,17 @@
     </div>
 </div>
 {% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script>
+$(document).ready(function(){
+    $("#search-champion").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#champion-list").children().filter(function() {
+            $(this).toggle($(this).data('champion').toLowerCase().indexOf(value) > -1);
+        });
+    });
+});
+</script>
+{% endblock scripts %}
