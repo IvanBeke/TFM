@@ -29,7 +29,7 @@ class Command(BaseCommand):
             'accountId': {
                 '$not': {'$in': list(accounts_with_matches)}
             }
-        }, {'accountId': 1})
+        }, {'accountId': 1}, no_cursor_timeout=True).batch_size(50)
         summoners_count = summoners.count()
         for summoner in summoners:
             matches = cass.MatchHistory(
