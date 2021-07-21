@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     {% block html %}
@@ -11,6 +12,11 @@
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
+        />
+
+        <link
+            href="{% static 'betterbuilds/favicon.ico' %}"
+            rel="icon"
         />
 
         <title>{% block title %}BetterBuilds{% endblock %}</title>
