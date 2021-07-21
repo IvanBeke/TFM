@@ -43,7 +43,6 @@ class Command(BaseCommand):
                 match_dict = json.loads(match_json)
                 match_dict['gameId'] = match_dict['id']
                 del(match_dict['id'])
-                matches_collection.insert(match_dict)
                 try:
                     matches_collection.insert(match_dict)
                 except DuplicateKeyError:
