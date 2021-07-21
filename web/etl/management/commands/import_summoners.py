@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from django_cassiopeia import cassiopeia as cass
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
-from .utils import *
+from web.utils import *
 import os, copy, time, shutil
 
 class Command(BaseCommand):
@@ -100,4 +100,4 @@ class Command(BaseCommand):
         shutil.rmtree(self.execution_cache_dir)
 
         end = time.time()
-        print(f'\nEl proceso ha tardado {end - start}s')
+        print(f'\nEl proceso ha tardado {get_time(end - start)}')

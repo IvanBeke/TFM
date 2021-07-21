@@ -55,6 +55,13 @@ CASSIOPEIA_PIPELINE = {
     'RiotAPI': {},
 }
 
+CASSIOPEIA_LOGGING = {
+    "PRINT_CALLS": False,
+    "PRINT_RIOT_API_KEY": False,
+    "DEFAULT": "WARNING",
+    "CORE": "WARNING"
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

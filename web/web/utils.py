@@ -1,5 +1,16 @@
 import json, requests, time, os
 import dill as pickle
+from datetime import datetime, timedelta
+
+def get_time(time: int) -> str:
+    day = time // (24 * 3600)
+    time = time % (24 * 3600)
+    hour = time // 3600
+    time %= 3600
+    minutes = time // 60
+    time %= 60
+    seconds = time
+    return f'{int(day)}d {int(hour)}h {int(minutes)}m {round(seconds, 4)}s'
 
 def build_url(region: str, base_url: str, endpoint: str, *params) -> str:
     """Build complete url to call.
