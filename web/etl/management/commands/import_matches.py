@@ -30,7 +30,7 @@ class Command(BaseCommand):
                 '$not': {'$in': list(accounts_with_matches)}
             }
         }, {'accountId': 1}, no_cursor_timeout=True).batch_size(50)
-        summoners_count = summoners.count()
+        summoners_count = summoners.count() + len(accounts_with_matches)
         for summoner in summoners:
             matches = cass.MatchHistory(
                 summoner=cass.Summoner(account_id=summoner['accountId']),
