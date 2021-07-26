@@ -2,7 +2,7 @@ from djongo import models
 
 class FrequentBuilds(models.Model):
     champion = models.IntegerField()
-    type = models.CharField(max_length=25)
+    games = models.IntegerField()
     builds = models.JSONField()
 
     class Meta:
