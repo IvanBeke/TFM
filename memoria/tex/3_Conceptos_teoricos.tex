@@ -10,13 +10,13 @@ Los jugadores se enfrentan en un mapa \ref{fig:mapa-lol} en forma de cuadrado, c
 \begin{figure}
 	\centering
 	\includegraphics[width=1\linewidth]{img/mapa-lol}
-	\caption{Mapa de \textit{League of Legends}}
+	\caption{Mapa de \textit{League of Legends}.}
 	\label{fig:mapa-lol}
 \end{figure}
 
-Para ganar la partida hay que destruir el nexo del equipo enemigo, es la estructura que está más alejada de la base propia. Está protegido por otro tipo de estructuras llamadas torres, que se encargar de proteger las calles de cada equipo y el nexo. Existen tres torres por cada línea y equipo, y dos adicionales que se encargan de proteger el nexo. Las torres se tienen que derribar en el orden que se van encontrando en cada línea, no se puede destruir directamente el nexo si, como mínimo, no se han destruido todas las torres de una calle del equipo rival.
+Para ganar la partida hay que destruir el nexo del equipo enemigo, es la estructura que está más alejada de la base propia. Las torres son otro tipo de estructuras situadas por el mapa, que disparan a los campeones del equipo contrario. Existen tres torres por cada línea y equipo, además de dos adicionales que protegen cada nexo. Las torres se tienen que derribar en el orden que se van encontrando en cada línea, y para destruir el nexo, como mínimo, hay que haber derribado todas las torres de una calle.
 
-La forma en la que un equipo consigue ventaja sobre el rival es mediante el oro, este se consigue de varias formas. La principal forma es asesinando a los campeones enemigos. Otra formas de conseguir oro es destruyendo las estructuras enemigas. La última forma de conseguir oro es matando monstruos y súbditos, los primeros se encuentras en la jungla, los segundos recorren las calles en oleadas. Tanto los campeones como los monstruos y súbditos vuelven a aparecen pasado un tiempo concreto, las estructuras una vez destruidas se mantienen así.
+La forma en la que un equipo consigue ventaja sobre el rival es mediante el oro, este se consigue de varias formas. La principal forma es asesinando a los campeones enemigos. Otra formas de conseguir oro es destruyendo las estructuras enemigas. La última forma de conseguir oro es matando monstruos y súbditos, los primeros se encuentran en la jungla, los segundos recorren las calles en oleadas. Tanto los campeones como los monstruos y súbditos vuelven a aparecen pasado un tiempo concreto, las estructuras una vez destruidas se mantienen así.
 
 El oro permite comprar objetos, que mejoran las habilidades del campeón, haciendo que sea más sencillo derrotar a los campeones enemigos, lo que proporciona más oro para más objetos, causando un efecto bola de nieve y la eventual victoria del equipo.
 
@@ -39,11 +39,13 @@ Para que un campeón acabe en una categoría u otra hay que prestar atención a 
 
 \subsection{Habilidades}
 \label{habilidades}
-Cada campeón tiene un conjunto único de habilidades, una pasiva y cuatro activas. Se pueden definir con las operaciones que un jugador puede realizar para interactuar dentro de la partida con el mapa, otros jugadores, monstruos y súbditos.
+Cada campeón tiene un conjunto único de habilidades, una pasiva y cuatro activas. Se pueden definir como las operaciones que un jugador puede realizar para interactuar con el mapa, con otros jugadores, monstruos y súbditos.
 
 Cada habilidad puede tener un efecto o combinar varios, los cuales se aplican sobre uno mismo, un aliado o enemigo. Los efectos más comunes son las curaciones, realizar daños o control de adversario, donde se engloban ralentizaciones o inmovilizaciones. Estos efectos tienen unos valores numéricos que constan de dos partes, un valor base y uno variable que depende de las estadísticas del campeón.
 
-En el caso de realizar daño a un rival, existen tres formas en que las que puede realizar: daño físico, mágico o verdadero. Esto está determinado por la habilidad y rol del campeón.
+Explicado con un ejemplo, una habilidad de un campeón hace daño a un enemigo con un valor base de 150 puntos de vida y un valor variable que corresponde al 30\% daño de ataque del campeón. Si en un momento determinado el campeón tiene 300 de daño de ataque, el daño total de la habilidad se calcula como $150 + (0,3 * 300) = 240$.
+
+En el caso de realizar daño a un rival, existen tres formas en las que puede realizar: daño físico, mágico y verdadero. Esto está determinado por la habilidad y rol del campeón.
 
 \subsection{Estadísticas}
 \label{estadisticas}
@@ -54,10 +56,10 @@ Las estadísticas son diferentes valores numéricos que determinan las capacidad
 	\item[Velocidad de ataque] Cantidad de ataques básicos que se pueden realizar por segundo.
 	\item[Poder de habilidad] Modifica el daño que realizan las habilidades.
 	\item[Velocidad de movimiento] Velocidad a la que un campeón se desplaza por el mapa.
-	\item[Armadura] Protección frente al daño físico.
-	\item[Resistencia mágica] Protección frente al daño mágico.
-	\item[Penetración de armadura] Omisión de la armadura del rival.
-	\item[Penetración mágica] Omisión de la resistencia mágica del rival.
+	\item[Armadura] Cantidad en la que se ve reducida el daño físico que se recibe.
+	\item[Resistencia mágica] Cantidad en la que se ve reducida el daño mágico que se recibe.
+	\item[Penetración de armadura] Cantidad de la armadura del rival ignorada a la hora de realizar daño físico.
+	\item[Penetración mágica] Cantidad de la resistencia mágica del rival ignorada a la hora de realizar daño mágico.
 	\item[Vida] Daño que tiene que recibir un personaje para morir.
 	\item[Maná] Coste de usar habilidades.
 	\item[Robo de vida] Porcentaje de vida recuperado al dañar a un rival.
@@ -77,7 +79,7 @@ En el juego actual existen 222 objetos disponibles clasificados en cinco categor
 \end{description}
 
 \subsection{Ligas}
-Al igual que otros deportes, \textit{League of Legends} posee un sistema de ligas que clasifica a los jugadores que lo deseen dentro de su sistema de ligas, en base a la habilidad que demuestren en sus partidas. Ordenadas de menor a mayor habilidad, y con el porcentaje de pertenencia sobre el total, las ligas del juego son las siguientes:
+Al igual que otros deportes, \textit{League of Legends} posee un sistema de ligas que clasifica a los jugadores que lo deseen dentro de su sistema de ligas, en base a la habilidad que demuestren en sus partidas. Ordenadas de menor a mayor habilidad, y con el porcentaje de pertenencia sobre el total \cite{misc:player-distribution}, las ligas del juego son las siguientes:
 \begin{itemize}
 	\tightlist
 	\item Hierro - 2\%
@@ -90,9 +92,9 @@ Al igual que otros deportes, \textit{League of Legends} posee un sistema de liga
 	\item Gran Maestro - 0,029\%
 	\item Aspirante - 0,013\%
 \end{itemize}
-Desde Hierro a Diamante, cada una cuenta con cuatro divisiones (desde IV a I), las tres restantes tiene una única división. Además, tanto Gran Maestro como Aspirante tienen plazas limitadas, 700 y 300 respectivamente.
+Desde Hierro a Diamante, cada una cuenta con cuatro divisiones (subcategorías dentro de cada liga), que van desde IV a I. Las tres restantes tiene una única división. Además, tanto Gran Maestro como Aspirante tienen plazas limitadas, 700 y 300 respectivamente.
 
-La localización de cada jugador se basa en un sistema de puntos, ganándolos al ganar partidas y perdiéndolos al perder. En las ligas con divisiones, cuando el jugador alcanza 100 puntos pasa a la siguiente división, o el caso de estar en la divisón más superior, subiría de liga. Por encima de Diamante no hay límite de puntos, y estando los jugadores ordenados por estos, la clasificación se realiza según el límite de plazas mencionado anteriormente.
+La localización de cada jugador se basa en un sistema de puntos, ganándolos al ganar partidas y perdiéndolos al perder. En las ligas con divisiones, cuando el jugador alcanza 100 puntos pasa a la siguiente división, o el caso de estar en la divisón superior, subiría de liga. Por encima de Diamante no hay límite de puntos, y estando los jugadores ordenados por estos, la clasificación se realiza según el límite de plazas mencionado anteriormente.
  
 
 %En aquellos proyectos que necesiten para su comprensión y desarrollo de unos conceptos teóricos de una determinada materia o de un determinado dominio de conocimiento, debe existir un apartado que sintetice dichos conceptos.
