@@ -44,7 +44,7 @@ def champion_for_current_match(request: HttpRequest) -> HttpResponse:
                         return redirect(champions_builds, champion_id=champion.id)
                 messages.error(request, f'El jugador {summoner.name} no se encuentra en la partida buscada', 'alert-danger')
             else:
-                messages.error(request, f'EL jugador {summoner.name} no está actualmente en una partida', 'alert-danger')
+                messages.error(request, f'El jugador {summoner.name} no está actualmente en una partida', 'alert-danger')
     else:
         messages.error(request, 'Búsqueda realizada con un método no permitido', 'alert-danger')
     return redirect(champions)
