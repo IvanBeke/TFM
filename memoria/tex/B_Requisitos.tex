@@ -2,9 +2,44 @@
 
 \section{Introducción}
 
+En este apéndice se describen los objetivos generales de la aplicación y se detallan sus requisitos, tanto funcionales como no funcionales.
+
 \section{Objetivos generales}
+\begin{itemize}
+    \item Desarrollar un proceso ETL que sea capaz de recopilar los datos necesarios usando la API oficial de Riot Games\footnote{Riot Games es la desarrolladora de League of Legends}.
+	\item Aplicar técnicas de aprendizaje no supervisado sobre los datos recopilados, en este caso algoritmos para la obtención de conjuntos frecuentes de objetos.
+	\item Ser capaz de obtener conocimiento útil a partir de los datos obtenidos.
+	\item Desarrollar una aplicación en la que se pueda consultar el conocimiento extraído.
+	\item Que el producto final sea capaz de ayudar a los nuevos jugadores.
+\end{itemize}
 
 \section{Catalogo de requisitos}
+\subsection{Requisitos funcionales}
+\begin{itemize}
+	\item \textbf{RF-1 Proceso ETL}: la aplicación debe ser capaz de recopilar, transformar y almacenar los datos para sus posterior uso.
+	\begin{itemize}
+		\item \textbf{RF-1.1 Extracción de jugadores}: la aplicación debe ser extraer los jugadores de las ligas más altas.
+		\item \textbf{RF-1.2 Extracción de partidas}: la aplicación debe extraer las partidas de los jugadores obtenidos previamente.
+		\item \textbf{RF-1.3 Generación de transacciones}: la aplicación debe transformar los datos de partidas en listados de objetos agrupados por campeón.
+		\item \textbf{RF-1.4 Generación de conjuntos frecuentes}: la aplicación debe generar conjuntos frecuentes de objetos usando las transacciones obtenidas anteriormente.
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+	\item \textbf{RF-2 Consulta de información}: la aplicación debe ser capaz de recopilar, transformar y almacenar los datos para sus posterior uso.
+	\begin{itemize}
+		\item \textbf{RF-2.1 Búsqueda por campeón}: el usuario debe poder buscar conjuntos frecuentes filtrando por un campeón concreto.
+		\item \textbf{RF-2.2 Búsqueda en partida activa}: el usuario debe poder buscar conjuntos de objetos usando su nombre dentro del juego, de tal forma que se muestre la información adecuada para el campeón usado en ese momento.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Requisitos no funcionales}
+\begin{itemize}
+	\item \textbf{RNF-1 Usabilidad}: la aplicación debe ser intuitiva y fácil de usar.
+	\item \textbf{RNF-2 Mantenibilidad}: debe ser sencillo añadir funcionalidad nueva a la aplicación.
+	\item \textbf{RNF-3 Compatibilidad}: la aplicación debe poder funcionar en	los principales navegadores.
+	\item \textbf{RNF-4 Responsividad}: la aplicación debe adaptarse al tamaño	de la pantalla.
+\end{itemize}
 
 \section{Especificación de requisitos}
 
