@@ -78,8 +78,8 @@ class Command(BaseCommand):
         client = MongoClient()
         db = client.etl
         collection = db.summoners
-        if summoners_index == 0:
-            collection.delete_many({})
+        # if summoners_index == 0:
+        #     collection.delete_many({})
         for player in players[summoners_index:]:
             summoner = player.summoner
             summoner.account_id  # Forzar a pedir los datos

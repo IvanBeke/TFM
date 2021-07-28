@@ -23,8 +23,8 @@ class Command(BaseCommand):
         db = client.etl
         summoners_collection = db.summoners
         matches_collection = db.matches
-        if len(accounts_with_matches) == 0:
-            matches_collection.delete_many({})
+        # if len(accounts_with_matches) == 0:
+        #     matches_collection.delete_many({})
         summoners = summoners_collection.find({
             'accountId': {
                 '$not': {'$in': list(accounts_with_matches)}
