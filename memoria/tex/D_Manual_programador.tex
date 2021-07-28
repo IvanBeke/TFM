@@ -1,8 +1,62 @@
 \apendice{Documentación técnica de programación}
 
 \section{Introducción}
+En este apéndice se presenta todo lo que tiene que conocer un desarrollador para poder continuar con el desarrollo de la aplicación. Se describe la estructura de directorios del proyecto, como instalar la aplicación, etc.
+
+El proyecto tiene dos partes diferenciadas en cuanto a desarrollo. La primera es una colección de \textit{notebooks} en la que se realizar pruebas con la API y algoritmos. La segunda es una aplicación web Django estándar.
 
 \section{Estructura de directorios}
+
+\dirtree{%
+.1 / Directorio raíz.
+.2 memoria/ -Documentación del proyecto.
+	.3 img/ -Imágenes de la memoria.
+	.3 tex/ -Secciones de la memoria.
+	.3 memoria.tex -Código fuente de la memoria.
+	.3 memoria.pdf -Memoria del proyecto.
+	.3 bibliografia.bib -Fuentres bibliográficas.
+.2 scripts and notebooks/ -Colección de notebooks y scripts.
+	.3 outputs/ -Directorio donde se almacenan las salidas de los notebooks.
+	.3 0\_extract\_players.ipynb -Notebook para extraer jugadores.
+	.3 1\_extract\_matches.ipynb -Notebook para extraer partidas.
+	.3 2\_download\_matches\_details.ipynb -Notebook para obtener detalles de cada partida.
+	.3 3\_algorithms.ipynb -Notebook para probar algoritmos.
+	.3 utils.py -Colección de funciones comunes para los notebooks.
+	.3 api\_key.txt -Fichero que contiene la clave de la API.
+	.3 requirements.txt -Fichero que lista las dependencias.
+.2 web/ -Directorio del proyecto en Django.
+	.3 betterbuilds/ -App de Django que contiene la web.
+		.4 migrations/.
+		.4 static/.
+		.4 templates/.
+		.4 \_\_init.py\_\_.
+		.4 admin.py.
+		.4 apps.py.
+		.4 models.py.
+		.4 tests.py.
+		.4 urls.py.
+		.4 views.py.
+	.3 etl/ -App de Django que contiene el proceso ETL.
+		.4 management/.
+			.5 commands/.
+		.4 migrations/.
+		.4 \_\_init.py\_\_.
+		.4 admin.py.
+		.4 apps.py.
+		.4 models.py.
+		.4 tests.py.
+		.4 views.py.
+	.3 web/ -Directorio de configuración del proyecto Django.
+		.4 \_\_init.py\_\_.
+		.4 asgi.py.
+		.4 settings.py.
+		.4 urls.py.
+		.4 utils.py.
+		.4 wsgi.py.
+	.3 .env -Fichero con varibles de entorno.
+	.3 manage.py -Script para interactuar con el proyecto.
+	.3 requirements.txt -Fichero que lista las dependencias.
+}
 
 \section{Manual del programador}
 
