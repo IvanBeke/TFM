@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django_cassiopeia import cassiopeia as cass
 from .models import FrequentBuilds
@@ -14,15 +15,36 @@ def champions(request: HttpRequest) -> HttpResponse:
 
 def champions_builds(request: HttpRequest, champion_id: int) -> HttpResponse:
     champion = cass.Champion(id=champion_id, locale='es_ES')
-    frequent_build = FrequentBuilds.objects.filter(champion=champion_id, type='basic').first()
+    frequent_build = FrequentBuilds.objects.filter(champion=champion_id).first()
     if frequent_build is not None:
         for build in frequent_build.builds:
-            build['support'] = round(build['support'], 2) * 100
+            build['support'] = round(build['support'] * 100, 2)
             build['items'] = list()
-            for item in build['itemsets']:
+            for item in build['itemset']:
                 build['items'].append(cass.Item(id=item, locale='es_ES'))
             build['items'] = sorted(build['items'], key=lambda item:-item.gold.total)
     return render(request, 'betterbuilds/champion_builds.html', {
         'champion': champion,
         'frequent_build': frequent_build,
     })
+
+def champion_for_current_match(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        summoner_name = request.POST.get('summoner-name')
+        summoner = cass.Summoner(name=summoner_name)
+        if not summoner.exists:
+            messages.error(request, f'No existen jugadores con el nombre {summoner_name}', 'alert-danger')
+        else:
+            current_match = summoner.current_match
+            if current_match.exists:
+                for player in current_match.participants:
+                    if player.summoner.name == summoner.name:
+                        champion = player.champion
+                        messages.success(request, 'Partida encontrada correctamente', 'alert-success')
+                        return redirect(champions_builds, champion_id=champion.id)
+                messages.error(request, f'El jugador {summoner.name} no se encuentra en la partida buscada', 'alert-danger')
+            else:
+                messages.error(request, f'EL jugador {summoner.name} no está actualmente en una partida', 'alert-danger')
+    else:
+        messages.error(request, 'Búsqueda realizada con un método no permitido', 'alert-danger')
+    return redirect(champions)
