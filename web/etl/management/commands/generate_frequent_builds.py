@@ -17,7 +17,7 @@ class Command(BaseCommand):
         start = time.time()
 
         client = MongoClient()
-        transactions = client.etl.transactions.find({})
+        transactions = client.etl.transactions.find({'position': {'$ne': None}})
         FrequentBuilds.objects.all().delete()
         for champion_builds in transactions:
             te = TransactionEncoder()
@@ -27,6 +27,7 @@ class Command(BaseCommand):
             frequent_build = FrequentBuilds()
             frequent_build.champion = champion_builds['championId']
             frequent_build.games = len(champion_builds['transactions'])
+            frequent_build.position = champion_builds['position']
             builds = []
             for itemset in result:
                 items = []

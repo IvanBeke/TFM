@@ -20,24 +20,30 @@ class Command(BaseCommand):
         client.etl.matches.aggregate([
             {
                 '$unwind': {
-                    'path': '$participants'
+                    'path': '$teams'
+                }
+            },
+            {
+                '$unwind': {
+                    'path': '$teams.participants'
                 }
             },
             {
                 '$set': {
                     'items': [
-                        '$participants.stats.item0',
-                        '$participants.stats.item1',
-                        '$participants.stats.item2',
-                        '$participants.stats.item3',
-                        '$participants.stats.item4',
-                        '$participants.stats.item5'
+                        '$teams.participants.stats.item0',
+                        '$teams.participants.stats.item1',
+                        '$teams.participants.stats.item2',
+                        '$teams.participants.stats.item3',
+                        '$teams.participants.stats.item4',
+                        '$teams.participants.stats.item5'
                     ]
                 }
             },
             {
                 '$project': {
-                    'participants.championId': 1,
+                    'teams.participants.championId': 1,
+                    'teams.participants.position': 1,
                     'items': {
                         '$filter': {
                             'input': '$items',
@@ -53,9 +59,15 @@ class Command(BaseCommand):
             },
             {
                 '$group': {
-                    '_id': '$participants.championId',
+                    '_id': {
+                        'champ': '$teams.participants.championId',
+                        'pos': '$teams.participants.position'
+                    },
                     'championId': {
-                        '$first': '$participants.championId'
+                        '$first': '$teams.participants.championId'
+                    },
+                    'position': {
+                        '$first': '$teams.participants.position'
                     },
                     'transactions': {
                         '$push': '$items'
