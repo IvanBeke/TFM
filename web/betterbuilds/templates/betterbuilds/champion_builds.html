@@ -36,13 +36,21 @@
     </div>
     {% if frequent_build is not None %}
         <div>
-            {% for build in frequent_build.builds %}
-            <div class="mb-2">
-                Esta elección se realiza el {{ build.support }}% de las partidas:
-                {% for item in build.items %}
-                    <img class="img-fluid" src={{ item.image.url }} data-bs-toggle="tooltip" data-bs-placement="top" title="{{ item.name }}">
-                {% endfor %}
-                <br>
+            {% for build in frequent_build.builds|dictsortreversed:"support" %}
+            <div class="row">
+                {% comment %} Esta elección se realiza el {{ build.support }}% de las partidas: {% endcomment %}
+                <div class="col-12 col-md-4 mb-2 mb-md-0">
+                    Porcentaje de elección
+                    <div class="progress" style="height: 25px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="height: 25px; width: {{ build.support|floatformat:"0" }}%;" aria-valuenow="{{ build.support }}" aria-valuemin="0" aria-valuemax="100">{{ build.support }}%</div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-8">
+                    {% for item in build.items %}
+                        <img class="img-fluid" src={{ item.image.url }} data-bs-toggle="tooltip" data-bs-placement="top" title="{{ item.name }}">
+                    {% endfor %}
+                </div>
+                <hr/>
             </div>
             {% endfor %}
         </div>
