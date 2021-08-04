@@ -15,17 +15,21 @@ def champions(request: HttpRequest) -> HttpResponse:
 
 def champions_builds(request: HttpRequest, champion_id: int) -> HttpResponse:
     champion = cass.Champion(id=champion_id, locale='es_ES')
-    frequent_build = FrequentBuilds.objects.filter(champion=champion_id).first()
-    if frequent_build is not None:
-        for build in frequent_build.builds:
-            build['support'] = round(build['support'] * 100, 2)
-            build['items'] = list()
-            for item in build['itemset']:
-                build['items'].append(cass.Item(id=item, locale='es_ES'))
-            build['items'] = sorted(build['items'], key=lambda item:-item.gold.total)
+    frequent_builds = FrequentBuilds.objects.filter(champion=champion_id, ).all()
+    total_games = 0
+    if frequent_builds is not None:
+        for frequent_build in frequent_builds:
+            total_games += frequent_build.games
+            for build in frequent_build.builds:
+                build['support'] = round(build['support'] * 100, 2)
+                build['items'] = list()
+                for item in build['itemset']:
+                    build['items'].append(cass.Item(id=item, locale='es_ES'))
+                build['items'] = sorted(build['items'], key=lambda item:-item.gold.total)
     return render(request, 'betterbuilds/champion_builds.html', {
         'champion': champion,
-        'frequent_build': frequent_build,
+        'frequent_builds': frequent_builds,
+        'total_games': total_games,
     })
 
 def champion_for_current_match(request: HttpRequest) -> HttpResponse:

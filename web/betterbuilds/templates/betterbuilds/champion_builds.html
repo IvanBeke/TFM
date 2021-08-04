@@ -1,5 +1,6 @@
 {% extends "betterbuilds/base.html" %}
 {% block content %}
+{% load build_filters %}
 <div class="container py-4">
     <nav>
         <ol class="breadcrumb">
@@ -16,7 +17,7 @@
             <div class="col-md-10">
                 <div class="card-body">
                     <h1 class="card-title">{{ champion.name }}</h1>
-                    <span class="card-text text-muted">{{ frequent_build.games }} partidas analizadas</span>
+                    <span class="card-text text-muted">{{ total_games }} partidas analizadas</span>
                     <div class="row">
                         <div class="col-md-6">
                             <p class="card-test">{{ champion.lore }}</p>
@@ -34,25 +35,42 @@
             </div>
         </div>
     </div>
-    {% if frequent_build is not None %}
-        <div>
-            {% for build in frequent_build.builds|dictsortreversed:"support" %}
-            <div class="row">
-                {% comment %} Esta elección se realiza el {{ build.support }}% de las partidas: {% endcomment %}
-                <div class="col-12 col-md-4 mb-2 mb-md-0">
-                    Porcentaje de elección
-                    <div class="progress" style="height: 25px;">
-                        <div class="progress-bar bg-success" role="progressbar" style="height: 25px; width: {{ build.support|floatformat:"0" }}%;" aria-valuenow="{{ build.support }}" aria-valuemin="0" aria-valuemax="100">{{ build.support }}%</div>
+    {% if frequent_builds is not None %}
+        <ul class="nav nav-tabs nav-fill" id="positions" role="tablist">
+        {% for frequent_build in frequent_builds|dictsortreversed:"games" %}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link{% if forloop.first %} active{% endif %}"
+                    id="{{ frequent_build.position }}-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#{{ frequent_build.position }}"
+                    type="button"
+                    role="tab"
+                    aria-controls="{{ frequent_build.position }}"
+                    aria-selected="true">{{ frequent_build.position_name }} ({{ frequent_build.games|percentage:total_games }}%)</button>
+            </li>
+        {% endfor %}
+        </ul>
+        <div class="tab-content mt-2" id="builds">
+            {% for frequent_build in frequent_builds %}
+            <div class="tab-pane fade{% if forloop.first %} show active{% endif %}" id="{{ frequent_build.position }}" role="tabpanel" aria-labelledby="{{ frequent_build.position }}-tab">
+                {% for build in frequent_build.builds|dictsortreversed:"support" %}
+                <div class="row">
+                    <div class="col-12 col-md-4 mb-2 mb-md-0">
+                        Porcentaje de elección
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="height: 25px; width: {{ build.support|floatformat:"0" }}%;" aria-valuenow="{{ build.support }}" aria-valuemin="0" aria-valuemax="100">{{ build.support }}%</div>
+                        </div>
                     </div>
+                    <div class="col-12 col-md-8">
+                        {% for item in build.items %}
+                            <img class="img-fluid" src={{ item.image.url }} data-bs-toggle="tooltip" data-bs-placement="top" title="{{ item.name }}">
+                        {% endfor %}
+                    </div>
+                    <hr/>
                 </div>
-                <div class="col-12 col-md-8">
-                    {% for item in build.items %}
-                        <img class="img-fluid" src={{ item.image.url }} data-bs-toggle="tooltip" data-bs-placement="top" title="{{ item.name }}">
-                    {% endfor %}
-                </div>
-                <hr/>
+                {% endfor %}
             </div>
-            {% endfor %}
+        {% endfor %}
         </div>
     {% else %}
         <div class="alert alert-danger" role="alert">
