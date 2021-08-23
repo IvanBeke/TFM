@@ -312,56 +312,55 @@
 \newcommand{\course}[1]{\def\@course{#1}}
 \definecolor{cpardoBox}{HTML}{E6E6FF}
 \def\maketitle{
-  \null
-  \thispagestyle{empty}
-  % Cabecera ----------------
-\begin{center}%
-	{\noindent\Huge Universidades de Burgos, León y Valladolid}\vspace{.5cm}%
-
-	{\noindent\Large Máster universitario}\vspace{.5cm}%
-
-	{\noindent\Huge \textbf{Inteligencia de Negocio y Big~Data en Entornos Seguros}}\vspace{.5cm}%
-\end{center}%
-
-\begin{center}%
-	\includegraphics[height=3cm]{img/escudoUBU} \hspace{1cm}
-	\includegraphics[height=3cm]{img/escudoUVA} \hspace{1cm}
-	\includegraphics[height=3cm]{img/escudoULE} \vspace{1cm}%
-\end{center}%
-
-  \vfill
-  % Título proyecto y escudo informática ----------------
-  \colorbox{cpardoBox}{%
-    \begin{minipage}{.9\textwidth}
-      \vspace{.5cm}\Large
-      \begin{center}
-      \textbf{TFM del Máster Inteligencia de Negocio y Big Data en Entornos Seguros}\vspace{.6cm}\\
-      \textbf{\LARGE\@title{}}
-      \end{center}
-      \vspace{.2cm}
-    \end{minipage}
-
-  }%
-  \hfill
-  \vfill
-  % Datos de alumno, curso y tutores ------------------
-  \begin{center}%
-  {%
-    \noindent\LARGE
-    Presentado por \@author{}\\
-    en Universidad de Burgos --- \@date{}\\
-    Tutores: \@tutor{} y \@cotutor{}
-  }%
-  \end{center}%
-  \null
-  \cleardoublepage
-  }
+	\null
+	\thispagestyle{empty}
+	% Cabecera ----------------
+	\begin{center}%
+		{\noindent\LARGE Universidades de Burgos, León y Valladolid}\vspace{.5cm}%
+		
+		{\noindent\large Máster universitario}\vspace{.5cm}%
+		
+		{\noindent\LARGE \textbf{Inteligencia de Negocio y Big~Data en Entornos Seguros}}\vspace{.5cm}%
+	\end{center}%
+	
+	\begin{center}%
+		\includegraphics[height=3cm]{img/escudoUBU} \hspace{1cm}
+		\includegraphics[height=3cm]{img/escudoUVA} \hspace{1cm}
+		\includegraphics[height=3cm]{img/escudoULE} \vspace{1cm}%
+	\end{center}%
+	
+	\vfill
+	% Título proyecto y escudo informática ----------------
+	\colorbox{cpardoBox}{%
+		\begin{minipage}{.9\textwidth}
+			\vspace{.4cm}\large
+			\begin{center}
+				\textbf{TFM del Máster Inteligencia de Negocio y Big Data en Entornos Seguros}\vspace{.6cm}\\
+				\textbf{\Large\@title{}}
+			\end{center}
+			\vspace{.2cm}
+		\end{minipage}
+		
+	}%
+	\vfill
+	% Datos de alumno, curso y tutores ------------------
+	\begin{center}%
+		{%
+			\noindent\Large
+			Presentado por \@author{}\\
+			en la Universidad de Burgos --- \@date{}\\[1em]
+			Tutores: Dr. \@tutor{} y\\\hspace{3.7em}Dr. \@cotutor{}
+		}%
+	\end{center}%
+	\null
+	\cleardoublepage
+}
 \makeatother
 
 \newcommand{\nombre}{Iván Iglesias Cuesta} %%% cambio de comando
 \newcommand{\titulo}{Uso de técnicas de aprendizaje no supervisado para la ayuda en videojuegos tipo MOBA}
-\newcommand{\nombretutor}{Jose Francisco Díez Pastor}
-\newcommand{\nombrecotutor}{César-Ignacio García Osorio}
+\newcommand{\nombretutor}{José Francisco Díez Pastor}
+\newcommand{\nombrecotutor}{César Ignacio García Osorio}
 
 % Datos de portada
 \title{\titulo}
@@ -424,7 +423,7 @@ D. \nombretutor
 \hfill
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
-Vº. Bº. del tutor:\\[2cm]
+Vº. Bº. del Tutor:\\[2cm]
 D. \nombrecotutor
 \end{flushleft}
 \end{minipage}

@@ -15,10 +15,10 @@ El inicio oficial del proyecto fue el día 19 de mayo, con la reunión del Sprin
 Sprint dedicado a tareas logísticas y preparación del inicio del proyecto.
 
 \begin{itemize}
-    \item Creación del repositorio de código.
-    \item Solicitud de una clave permanente para la API a la desarrolladora del juego.
-    \item Pruebas con la API para comprobar la existencia de los datos necesarios.
-    \item Reunión para formalizar el inicio del desarrollo del proyecto.
+    \item Crear el repositorio de código.
+    \item Solicitar una clave permanente para la API a la desarrolladora del juego.
+    \item Comprobaren la API la existencia de los datos necesarios.
+    \item Formalizar el inicio del desarrollo del proyecto mediante una reunión con los tutores.
 \end{itemize}
 
 \subsection{Sprint 1}
@@ -26,9 +26,9 @@ Sprint dedicado a tareas logísticas y preparación del inicio del proyecto.
 Primer sprint de desarrollo. Dedicado a la extracción de jugadores. Desde 20/05/2021 hasta el 26/05/2021.
 
 \begin{itemize}
-    \item Documentación Sprint 0.
+    \item Documentar el Sprint 0.
     \item Echar un ojo a \textit{wrappers} existentes de la API para comprobar su viabilidad de uso.
-    \item Desarrollo de un \textit{notebook} para la extracción de jugadores, teniendo en cuenta límite de peticiones y tolerancia a fallos.
+    \item Desarrollar un \textit{notebook} para la extracción de jugadores, teniendo en cuenta límite de peticiones y tolerancia a fallos.
 \end{itemize}
 
 \subsection{Sprint 2}
@@ -36,9 +36,9 @@ Primer sprint de desarrollo. Dedicado a la extracción de jugadores. Desde 20/05
 Desde 27/05/2021 hasta el 02/06/2021.
 
 \begin{itemize}
-    \item Documentación Sprint 1.
+    \item Documentar el Sprint 1.
     \item Modificar extracción de jugadores para añadir identificador de cuenta, necesario para el siguiente paso de recuperación de partidas.
-    \item Desarrollo de un \textit{notebook} para extraer las partidas de los jugadores recuperador previamente.
+    \item Desarrollar un \textit{notebook} para extraer las partidas de los jugadores recuperados previamente.
     \item Crear biblioteca con funciones comunes para realizar peticiones y guardar estados de ejecución.
 \end{itemize}
 
@@ -47,7 +47,7 @@ Desde 27/05/2021 hasta el 02/06/2021.
 Desde 03/06/2021 hasta el 09/06/2021.
 
 \begin{itemize}
-    \item Documentación Sprint 2.
+    \item Documentar el Sprint 2.
     \item Partiendo de los datos de partidas del sprint anterior, localizar y extraer los objetos que se han comprado para cada campeón dentro de la partida.
     \item Crear el formato final con las entradas para el algoritmo apriori.
 \end{itemize}
@@ -57,9 +57,9 @@ Desde 03/06/2021 hasta el 09/06/2021.
 Desde 10/06/2021 hasta el 16/06/2021. Por conflicto con otras asignaturas durante esta semana se realizaron menos tareas.
 
 \begin{itemize}
-    \item Documentación Sprint 3.
+    \item Documentar Sprint 3.
     \item Escribir la introducción de la memoria.
-    \item Presentación sobre funcionamiento y conceptos del juego a los tutores.
+    \item Realizar una presentación sobre el funcionamiento y conceptos del juego a los tutores.
 \end{itemize}
 
 \subsection{Sprint 5}
@@ -67,12 +67,12 @@ Desde 10/06/2021 hasta el 16/06/2021. Por conflicto con otras asignaturas durant
 Desde 17/06/2021 hasta el 30/06/2021. La duración de este sprint se alargó a dos semanas por un problema de salud que impidió realizar avances significativos durante la primera.
 
 \begin{itemize}
-    \item Correcciones en la memoria.
+    \item Realizar correcciones en la memoria.
     \item Escribir objetivos del proyecto.
     \item Investigar alternativas del algoritmo apriori.
     \item Buscar y escoger una biblioteca con las implementaciones del algoritmo a utilizar y sus alternativas.
-    \item Aprendizaje de Django.
-    \item Inicio del desarrollo de la aplicación web.
+    \item Empezar con el aprendizaje de Django.
+    \item Iniciar el desarrollo de la aplicación web.
 \end{itemize}
 
 \subsection{Sprint 6}
@@ -80,8 +80,8 @@ Desde 17/06/2021 hasta el 30/06/2021. La duración de este sprint se alargó a d
 Desde 01/06/2021 hasta el 07/07/2021. Por conflicto con otras asignaturas durante esta semana se realizaron menos tareas.
 
 \begin{itemize}
-    \item Desarrollo de un notebook en el que probar los algoritmos de conjuntos frecuentes.
-    \item Selección del algoritmo a usar para obtener los resultados que mostrar en la aplicación.
+    \item Desarrollar un notebook en el que probar los algoritmos de conjuntos frecuentes.
+    \item Seleccionar el algoritmo a usar para obtener los resultados que mostrar en la aplicación.
 \end{itemize}
 
 \subsection{Sprint 7}
@@ -89,31 +89,43 @@ Desde 01/06/2021 hasta el 07/07/2021. Por conflicto con otras asignaturas durant
 Desde 08/07/2021 hasta 14/07/2021.
 
 \begin{itemize}
-    \item Instalación de base de datos MongoDB.
+    \item Instalar una base de datos MongoDB.
     \item Guardar ejecución del algoritmo en MongoDB.
-    \item Listado de campeones en la aplicación web.
-    \item Al seleccionar un campeón mostrar sus conjuntos de objetos frecuentes.
+    \item Crear una vista con el listado de campeones en la aplicación web.
+    \item Crear una vista con en la que mostrar los conjuntos de objetos frecuentes de un campeón seleccionado.
 \end{itemize}
 
 \subsection{Sprint 8}
 
+Desde 08/07/2021 hasta 14/07/2021.
+
 \begin{itemize}
-    \item Documentación sprints 4, 5, 6 y 7.
-    \item Incorporación del \textit{notebook} de extracción de jugadores a la aplicación web.
- 	\item Incorporación del \textit{notebook} de extracción de partidas a la aplicación web.
+    \item Documentar los sprints 4, 5, 6 y 7.
+    \item Incorporar el \textit{notebook} de extracción de jugadores a la aplicación web.
+ 	\item Incorporar el \textit{notebook} de extracción de partidas a la aplicación web.
  	\item Añadir buscador de campeones.
- 	\item Ficha del campeón junto a sus objetos frecuentes.
- 	\item Mensaje cuando no existen datos para un campeón.
+ 	\item Añadir la ficha del campeón junto a sus objetos frecuentes.
+ 	\item Mostrar un mensaje cuando no existen datos para un campeón.
 \end{itemize}
 
 \subsection{Sprint 9}
 
+Desde 08/07/2021 hasta 14/07/2021.
+
 \begin{itemize}
-	\item Documentación sprints 8 y 9.
-	\item Extracción de gran cantidad de partidas.
-    \item Incorporación del \textit{notebook} de extracción de detalles de partidas a la aplicación web.
-    \item Incorporación del \textit{notebook} de extracción de ejecución de algoritmos a la aplicación web.
-    \item Escritura de conceptos teóricos sobre el juego.
+	\item Documentar los sprints 8 y 9.
+	\item Extraer partidas de forma masiva.
+    \item Incorporar el \textit{notebook} de extracción de detalles de partidas a la aplicación web.
+    \item Incorporar el \textit{notebook} de extracción de ejecución de algoritmos a la aplicación web.
+    \item Escribir los conceptos teóricos sobre el juego.
+\end{itemize}
+
+\subsection{Sprint 10}
+
+Desde 08/07/2021 hasta 14/07/2021.
+
+\begin{itemize}
+	\item
 \end{itemize}
 
 \section{Estudio de viabilidad}
