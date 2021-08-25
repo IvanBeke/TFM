@@ -59,7 +59,74 @@ El proyecto tiene dos partes diferenciadas en cuanto a desarrollo. La primera es
 }
 
 \section{Manual del programador}
+\subsection{Notebooks}
+\subsection{Aplicación web}
 
-\section{Compilación, instalación y ejecución del proyecto}
+\section{Instalación y ejecución del proyecto}
+Dado que el proyecto se ha desarrollado usando el sistema operativo Ubuntu, las instrucciones de instalación están orientadas a ese sistema.
+
+\subsection{Requisitos previos}
+Antes de comenzar con la instalación del proyecto, el sistema tiene que tener instaladas las siguientes utilidades:
+\begin{itemize}
+	\item \hrefFootnote{https://docs.anaconda.com/anaconda/install/index.html}{Anaconda}
+	\item \hrefFootnote{https://docs.mongodb.com/manual/administration/install-community/}{MongoDB}
+	\item \hrefFootnote{https://git-scm.com/downloads}{Git}
+\end{itemize}
+
+También es necesario tener una clave de acceso a la API de Riot Games para poder hacer uso de la misma. Para ello hay que crearse una cuenta de desarrollo en \url{https://developer.riotgames.com/} y seguir las instrucciones de \url{https://developer.riotgames.com/docs/portal}.
+
+\subsection{Instalación}\label{sec:instalacion}
+La forma más cómoda de obtener el código del proyecto es mediante \textit{git}, para ello usar el siguiente comando:
+\begin{lstlisting}
+	$ git clone <url_del_repositorio>
+\end{lstlisting}
+Siendo \url{https://github.com/IvanBeke/TFM} la URL del repositorio.
+
+Ya con el proyecto descargado, el siguiente paso es instalar las dependencias. Para ello hay que ejecutar el comando:
+\begin{lstlisting}
+	$ pip install -r scripts and notebooks/requirementes.txt
+\end{lstlisting}
+Para la aplicación se recomienda usar un entorno virtual para tener mejor control sobre las dependencias exactas. Para crearlo y activarlo:
+\begin{lstlisting}
+	$ conda create --name django
+	$ conda activate django
+\end{lstlisting}
+Una vez está el entorno en uso se instalan las depedendencias con el comando:
+\begin{lstlisting}
+	$ pip install -r web/requirementes.txt
+\end{lstlisting}
+
+\subsubsection{Variables de entorno}
+Para el uso de \textit{notebooks} se necesita crear un fichero \code{api\_key.txt}, en el directorio \textit{scripts and notebooks} que contiene la clave de acceso a la API.
+
+Para la aplicación web, hay que crear un fichero \code{.env}, en el directorio \textit{web} que contenga las variables de entorno. También se pueden definir en el propio sistema. El listado de variables a las que hay que dar un valor es el siguiente:
+\begin{itemize}
+	\item \code{RIOT\_API\_KEY}: clave de acceso a la API.
+	\item \code{RIOT\_API\_REGION}: región sobre la que se van a ejecutar las peticiones.
+	\item \code{SECRET\_KEY}: clave que usa \textit{Django} para seguridad interna.
+	\item \code{DEBUG}: define si está activado el modo \textit{debug} de la aplicación.
+\end{itemize}
+
+\subsection{Ejecución}
+Partiendo del directorio raíz se muestra como ejecutar los \textit{notebooks} o la aplicación web.
+\subsubsection{Notebooks}
+\begin{lstlisting}
+	$ cd scripts and notebooks
+	$ jupyter notebook
+\end{lstlisting}
+\subsubsection{Aplicación web}
+\begin{lstlisting}
+	$ cd web
+	$ python manage.py runserver
+\end{lstlisting}
+Con eso se lanzaría la aplicación web. Para la ejecución de las distintas fases del proceso de recopilación y entrenamiento se ejecutarían los siguientes comandos:
+\begin{lstlisting}
+	$ cd web
+	$ python manage.py import_summoners
+	$ python manage.py import_matches
+	$ python manage.py add_position
+	$ python manage.py generate_transaction
+	$ python manage.py generate_frequent_builds
+\end{lstlisting}
 
 %\section{Pruebas del sistema}
