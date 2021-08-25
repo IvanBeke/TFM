@@ -11,6 +11,7 @@
 \usepackage{microtype}
 \usepackage{placeins}
 \usepackage{dirtree}
+\usepackage{listings}
 
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
@@ -246,6 +247,11 @@
   \end{center}
 }
 
+\newcommand{\hrefFootnote}[2]{%
+	\href{#1}{#2}\footnote{\url{#1}}
+}
+
+\newcommand{\code}[1]{\texttt{#1}}
 
 
 \definecolor{cgoLight}{HTML}{EEEEEE}

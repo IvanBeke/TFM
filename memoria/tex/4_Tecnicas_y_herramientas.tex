@@ -1,10 +1,29 @@
 \capitulo{4}{Técnicas y herramientas}
 
-Esta parte de la memoria tiene como objetivo presentar las técnicas metodológicas y las herramientas de desarrollo que se han utilizado para llevar a cabo el proyecto. Si se han estudiado diferentes alternativas de metodologías, herramientas, bibliotecas se puede hacer un resumen de los aspectos más destacados de cada alternativa, incluyendo comparativas entre las distintas opciones y una justificación de las elecciones realizadas. 
-No se pretende que este apartado se convierta en un capítulo de un libro dedicado a cada una de las alternativas, sino comentar los aspectos más destacados de cada opción, con un repaso somero a los fundamentos esenciales y referencias bibliográficas para que el lector pueda ampliar su conocimiento sobre el tema.
-
-
 \section{Técnicas}
 
+\subsection{Scrum}
+Scrum es una metodología de desarrollo ágil basada en los principios del manifiesto ágil\footnote{\url{http://agilemanifesto.org/}}. Esta metodología esta pensada para equipos por lo que ha sido adaptada para el desarrollo de este proyecto.
+
+Scrum consiste en ciclos de trabajo iterativos denominados \textit{sprints}, con duración de una semana generalmente, en los que al terminar se entrega un producto funcional. Al final de cada \textit{sprint} se lleva a cabo una reunión con los tutores para comentar el desarrollo del \textit{sprint}, enseñar los avances y planear el siguiente ciclo de desarrollo.
 
 \section{Herramientas}
+
+\subsection{Git}
+Git es un sistema de control de versiones distribuido. No se han considerado otras alternativas al ser un sistema ya conocido. Actualmente puede ser considerado el sistema con más usuarios y de más fama.
+
+\subsection{GitHub}
+GitHub es un servicio de alojamiento de repositorios de código basado en \textit{git}.
+
+Esta plataforma se ha utilizado para alojar el proyecto, gestionar las tareas mediante \textit{issues} y planificar \textit{sprints} mediante \textit{milestones}.
+
+\subsection{Jupyter}
+\hrefFootnote{https://jupyter.org/}{Jupyter} es una plataforma, en formato de aplicación web, que permite desarrollar cuardernos que combinan texto y código. Desde ellos se puede ejecutar el código agrupado en celdas y ver la salida al mismo tiempo. Muy útil para realizar pruebas y mostrar resultados en tareas de análisis de datos.
+
+\subsection{Django}
+\hrefFootnote{https://www.djangoproject.com/}{Django} es un \textit{framework} para crear aplicaciones web escrito en \textit{Python} enfocado en el rápido desarrollo y facilitar gran parte del trabajo del desarrollo web.
+
+\subsection{MongoDB}
+\hrefFootnote{https://www.mongodb.com/}{MongoDB} es una base de datos NoSQL de tipo documental. Permite almacenar datos cuya estructura sea similar a JSON. En el ámbito de \textit{Big Data} es muy útil por su escalabilidad y velocidad. Adicionalmente proporciona herramientas para facilitar el proceso de transformación de los datos.
+
+Se ha escogido esta plataforma porque da la posibilidad de guardar las respuestas en bruto de la API y, mediante agregaciones, poder realizar las transformaciones de datos necesarias de forma rápida y eficiente, además de poder cargarlos en la base de datos final.
