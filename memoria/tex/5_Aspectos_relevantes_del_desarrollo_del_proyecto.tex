@@ -1,18 +1,34 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
 
-\section{Elección del proyecto}
+%\section{Elección del proyecto}
 
 
-\section{Explicación de la problemática}
+\section{Problema encontrado y propuesta de solución}
+Como se ha podido observar en \ref{sec:lol-conceptos}, para cualquier persona que quiera empezar a jugar, existe una cantidad de información abrumadora que puede impedir disfrutar de la experiencia y crear frustaciones.
 
+En primer lugar el gran número de campeones y sus habilidades hace que se tarde tiempo en aprender cómo manejar a los personajes. La siguiente dificultar es encontrar la mejor de combiación de objetos para cada campeón de forma que su utilidad dentro de la partida se maximice. Por último, al disponer de un espacio limitado en el inventario la toma de decisión de que objetos comprar se complica.
+
+Por estas razones, y sabiendo qué jugadores son los que mayor habilidad desmuestran en el juego gracias al sistema de ligas, se puede analizar el comportamiento de estos jugadores para obtener el conocimiento que poseen sobre el juego y ponerlo a disposición de los recién llegados.
+
+Para ello se propone un sistema que sea capaz de analizar las partidas de los jugadores de más alto nivel y extraer el conocimiento que poseen. Este conocimiento será puesto a disposición de otros jugadores por medio de una aplicación web.
 
 \section{Desarrollo de \textit{notebooks} y web}
+El desarrollo del proyecto ha tenido dos fases fácilmente diferenciadas, desarrollo de \textit{notebooks} y desarrollo de la aplicación web. A pesar de que pueda parecer que se ha hecho el mismo trabajo dos veces, esta metodología ha aportado grandes ventajas a lo largo del trabajo.
 
+En primer lugar, el uso de \textit{notebooks} ha permitido realizar pruebas de forma rápida con la API y poder comprobar de forma ágil que los datos necesarios para el desarrollo estaban accesibles, al igual que, ya teniendo muestras de los datos, realizar varias ejecuciones de los algoritmos candidatos y evaluar sus resultados.
 
-\section{Control de velocidad de peticiones por ratios de la API}
+En segundo lugar, al poder ejecutar fragmentos de código aislados se han podido identificar y solucionar varios problemas en la \textit{pipeline} (\ref{sec:rate-limit} y \ref{sec:fault-tolerance}) de forma rápida y sin que afecte al resto del desarrollo.
 
+Por último, esta forma de gestionar el desarrollo ha permitido que el desarrollo de la \textit{pipeline} integrada en la aplicación haya sido muy ágil. Además de que, como la mayoría de problemas se habían identificado en los \textit{notebooks}, el proceso final dentro la aplicación ha estado libre, casi al completo, de errores.
 
-\section{Tolerancia y recuperación de fallos}
+\section{Control de velocidad de peticiones por ratios de la API}\label{sec:rate-limit}
+sdfsfd
+
+\section{Tolerancia y recuperación de fallos}\label{sec:fault-tolerance}
+Como se ha explicado en la sección anterior (\ref{sec:rate-limit}), la recopilación de datos ha sido temporalmente costoso. En el caso de que ocurriera un error mientras se ejecutase, el proceso empezaría de cero y se pedirían datos que ya estuvieran guardados, perdiendo tiempo valioso.
+
+Por ello, desde el inicio del proyecto se decidió que el sistema tendría que contar con medios para que, en caso de fallos imprevistos, el proceso debería ser capaz de continuar la ejecución como si no hubiera ocurrido ningún fallo.
+
 
 
 \section{Fases del proceso de recopilación y entrenamiento}
