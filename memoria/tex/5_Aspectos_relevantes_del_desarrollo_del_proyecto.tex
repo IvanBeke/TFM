@@ -22,14 +22,16 @@ En segundo lugar, al poder ejecutar fragmentos de código aislados se han podido
 Por último, esta forma de gestionar el desarrollo ha permitido que el desarrollo de la \textit{pipeline} integrada en la aplicación haya sido muy ágil. Además de que, como la mayoría de problemas se habían identificado en los \textit{notebooks}, el proceso final dentro la aplicación ha estado libre, casi al completo, de errores.
 
 \section{Control de velocidad de peticiones por ratios de la API}\label{sec:rate-limit}
-sdfsfd
+Al depender de una API externa para realizar la recopilación de datos, las fases que dependen de la misma tienen un límite máximo de peticiones por tiempo que hay que respetar, ya que demasiadas violaciones de los límites pueden provocar que la desarrolladora restrinja el acceso a los datos.
+
+
 
 \section{Tolerancia y recuperación de fallos}\label{sec:fault-tolerance}
 Como se ha explicado en la sección anterior (\ref{sec:rate-limit}), la recopilación de datos ha sido temporalmente costoso. En el caso de que ocurriera un error mientras se ejecutase, el proceso empezaría de cero y se pedirían datos que ya estuvieran guardados, perdiendo tiempo valioso.
 
 Por ello, desde el inicio del proyecto se decidió que el sistema tendría que contar con medios para que, en caso de fallos imprevistos, el proceso debería ser capaz de continuar la ejecución como si no hubiera ocurrido ningún fallo.
 
-
+Para lograr el objetivo propuesto se guarda de forma periódica el estado de ejecución, serializando múltiples variables de control. En caso de que el proceso se detenga el estado previo de ejecución está guardado. Ahora, una vez reiniciada la ejecución, las variables que han sido guardadas previamente no se declaran como variables normales, si no que se comprueba si existe una serialización para ellas, en caso afirmativo se cargan y la ejecución contunúa a partir del punto cargado. En caso de que no exista un estado guardado, se asigna un valor inicial a las variables y el proceso empezaría de cero.
 
 \section{Fases del proceso de recopilación y entrenamiento}
 
