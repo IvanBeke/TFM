@@ -22,9 +22,17 @@ En segundo lugar, al poder ejecutar fragmentos de código aislados se han podido
 Por último, esta forma de gestionar el desarrollo ha permitido que el desarrollo de la \textit{pipeline} integrada en la aplicación haya sido muy ágil. Además de que, como la mayoría de problemas se habían identificado en los \textit{notebooks}, el proceso final dentro la aplicación ha estado libre, casi al completo, de errores.
 
 \section{Control de velocidad de peticiones por ratios de la API}\label{sec:rate-limit}
-Al depender de una API externa para realizar la recopilación de datos, las fases que dependen de la misma tienen un límite máximo de peticiones por tiempo que hay que respetar, ya que demasiadas violaciones de los límites pueden provocar que la desarrolladora restrinja el acceso a los datos.
+Al depender de una API externa para realizar la recopilación de datos, las fases que dependen de la misma tienen un límite máximo de peticiones por tiempo\footnote{\url{https://developer.riotgames.com/docs/portal\#web-apis_api-keys}} que hay que respetar, ya que demasiadas violaciones de los límites pueden provocar que la desarrolladora restrinja el acceso a los datos. Para el tipo de clave de acceso que se tiene actualmente (clave personal) los límites son:
+\begin{itemize}
+	\tightlist
+	\item 20 peticiones por segundo
+	\item 100 peticiones cada dos minutos
+\end{itemize}
+Al inicio del desarrollo se decidió usar retroceso exponencial. Esto es ir aumentando un tiempo de retardo entre peticiones introducido de forma manual cuando una petición falla, e ir disminuyéndolo poco a poco cuando el servidor vuelve a responder correctamente. Sin embargo el tiempo de espera que este método introducía disminuía notablemente el rendimiento de la extracción de datos, alargando el proceso más de lo necesario, además de añadir complejidad al proceso.
 
+Más adelante se localizó en la documentación de la API que, cuando una petición se rechaza por haber sobrepasado el límite, la respuesta de esa petición fallida retornaba en una cabecera el tiempo de espera necesario para volver a obtener respuestas correctas.
 
+Se procedió a cambiar el restroceso exponencial por una espera única del tiempo indicado en la respuesta, haciendo que el proceso de recopilación fuera más limpio y minimizando las esperas, de tal forma que se pudo aumentar el ratio de obtención de datos.
 
 \section{Tolerancia y recuperación de fallos}\label{sec:fault-tolerance}
 Como se ha explicado en la sección anterior (\ref{sec:rate-limit}), la recopilación de datos ha sido temporalmente costoso. En el caso de que ocurriera un error mientras se ejecutase, el proceso empezaría de cero y se pedirían datos que ya estuvieran guardados, perdiendo tiempo valioso.
