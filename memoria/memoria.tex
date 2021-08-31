@@ -12,6 +12,7 @@
 \usepackage{placeins}
 \usepackage{dirtree}
 \usepackage{listings}
+\usepackage[hyphens]{url}
 
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
@@ -21,7 +22,8 @@
 % Links
 \usepackage[colorlinks]{hyperref}
 \hypersetup{
-	allcolors = {red}
+	allcolors = {red},
+	breaklinks = true,
 }
 
 % Ecuaciones
@@ -516,7 +518,6 @@ MOBA, League of Legends, Riot Games, unsupervised items, frequent itemsets, ETL,
 \include{./tex/C_Diseno}
 \include{./tex/D_Manual_programador}
 \include{./tex/E_Manual_usuario}
-
 
 \bibliographystyle{plain}
 \bibliography{bibliografia}

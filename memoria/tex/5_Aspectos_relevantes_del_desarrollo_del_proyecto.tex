@@ -12,6 +12,8 @@ Por estas razones, y sabiendo qué jugadores son los que mayor habilidad desmues
 
 Para ello se propone un sistema que sea capaz de analizar las partidas de los jugadores de más alto nivel y extraer el conocimiento que poseen. Este conocimiento será puesto a disposición de otros jugadores por medio de una aplicación web.
 
+Para realizar el análisis de partidas se va a usar aprendizaje no supervisado, en concreto algoritmos para la obtención de conjuntos de elementos frecuentes. Al partir de los datos de los jugadores de mayor habilidad, de forma indirecta, se debería obtener el conjunto de objetos más útil para cada campeón.
+
 \section{Desarrollo de \textit{notebooks} y web}
 El desarrollo del proyecto ha tenido dos fases fácilmente diferenciadas, desarrollo de \textit{notebooks} y desarrollo de la aplicación web. A pesar de que pueda parecer que se ha hecho el mismo trabajo dos veces, esta metodología ha aportado grandes ventajas a lo largo del trabajo.
 
@@ -41,7 +43,8 @@ Por ello, desde el inicio del proyecto se decidió que el sistema tendría que c
 
 Para lograr el objetivo propuesto se guarda de forma periódica el estado de ejecución, serializando múltiples variables de control. En caso de que el proceso se detenga el estado previo de ejecución está guardado. Ahora, una vez reiniciada la ejecución, las variables que han sido guardadas previamente no se declaran como variables normales, si no que se comprueba si existe una serialización para ellas, en caso afirmativo se cargan y la ejecución contunúa a partir del punto cargado. En caso de que no exista un estado guardado, se asigna un valor inicial a las variables y el proceso empezaría de cero.
 
-\section{Fases del proceso de recopilación y entrenamiento}
+\section{Proceso de recopilación y entrenamiento}
+En esta sección se va a explicar las fases del proceso de recopilación de datos y cómo ha llevado a cabo la recopilación de los mismos, además de su transformación y entrenamiento final.
 
 \subsection{Extracción jugadores}
 \subsection{Extracción de partidas}
@@ -51,4 +54,10 @@ Para lograr el objetivo propuesto se guarda de forma periódica el estado de eje
 
 
 \section{Elección del algoritmo}
+Como se ha comentado anteriormente, para la resolución del problema se va a usar un algoritmo para obtención de conjuntos de elementos frecuentes.
 
+El listado de algoritmos\cite{chee_jaafar_aziz_hasan_yeoh_2018} que son capaces de resolver este problema es extenso, sin embargo, por tener conocimiento previo tanto del Apriori, como del FP-Growth al haber sido tratados durante el máster, se ha optado por acotar la decisión a estos. Adicionalmente, estos son los que generalmente suelen recomendarse y los que se encuentran implementados en varias bibliotecas de aprendizaje automático.
+
+En base a artículos existentes\cite{chonyy_2020_apriori}\cite{chonyy_2020_fpgrowth} se decidió usar FP-Growth en vez del Apriori por ser más rápido y requerir menos memoria. Por lo que durante el desarrollo del proyecto se usó ese algoritmo en las pruebas iniciales y después de realizar la recopilación de datos.
+
+Sin embargo, con los datos finales ocurría que el Apriori finalizaba su ejecución más rápido con el FP-Growth, por lo que finalmente se ha decidido dejar este algoritmo como el definitivo para la generación de conjuntos frecuentes.
