@@ -91,20 +91,20 @@ Para la aplicación se recomienda usar un entorno virtual para tener mejor contr
 	$ conda create --name django
 	$ conda activate django
 \end{lstlisting}
-Una vez está el entorno en uso se instalan las depedendencias con el comando:
+Una vez está el entorno en uso se instalan las dependendencias con el comando:
 \begin{lstlisting}
 	$ pip install -r web/requirementes.txt
 \end{lstlisting}
 
 \subsubsection{Variables de entorno}
-Para el uso de \textit{notebooks} se necesita crear un fichero \code{api\_key.txt}, en el directorio \textit{scripts and notebooks} que contiene la clave de acceso a la API.
+Para el uso de \textit{notebooks} se necesita crear un fichero \code{api\_key.txt}, en el directorio \code{scripts and notebooks} que contiene la clave de acceso a la API.
 
 Para la aplicación web, hay que crear un fichero \code{.env}, en el directorio \textit{web} que contenga las variables de entorno. También se pueden definir en el propio sistema. El listado de variables a las que hay que dar un valor es el siguiente:
 \begin{itemize}
 	\item \code{RIOT\_API\_KEY}: clave de acceso a la API.
 	\item \code{RIOT\_API\_REGION}: región sobre la que se van a ejecutar las peticiones.
 	\item \code{SECRET\_KEY}: clave que usa \textit{Django} para seguridad interna.
-	\item \code{DEBUG}: define si está activado el modo \textit{debug} de la aplicación.
+	\item \code{DEBUG}: define si está activado el modo depuración de la aplicación.
 \end{itemize}
 
 \subsection{Ejecución}

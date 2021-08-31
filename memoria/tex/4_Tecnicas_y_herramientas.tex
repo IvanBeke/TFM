@@ -1,29 +1,35 @@
 \capitulo{4}{Técnicas y herramientas}
 
-\section{Técnicas}
+En esta sección se van a explicar, por un lado, las técnicas que se han seguido durante el desarrollo del proyecto y por otro, las herramientas utilizadas para llevarlo a cabo.
 
-\subsection{Scrum}
+\section{Scrum}
 Scrum es una metodología de desarrollo ágil basada en los principios del manifiesto ágil\footnote{\url{http://agilemanifesto.org/}}. Esta metodología esta pensada para equipos por lo que ha sido adaptada para el desarrollo de este proyecto.
 
 Scrum consiste en ciclos de trabajo iterativos denominados \textit{sprints}, con duración de una semana generalmente, en los que al terminar se entrega un producto funcional. Al final de cada \textit{sprint} se lleva a cabo una reunión con los tutores para comentar el desarrollo del \textit{sprint}, enseñar los avances y planear el siguiente ciclo de desarrollo.
 
-\section{Herramientas}
+\section{Git}
+Git es un sistema distribuido de control de versiones. No se han considerado otras alternativas al ser un sistema ya conocido. Actualmente puede ser considerado el sistema con más usuarios y de más aceptación.
 
-\subsection{Git}
-Git es un sistema de control de versiones distribuido. No se han considerado otras alternativas al ser un sistema ya conocido. Actualmente puede ser considerado el sistema con más usuarios y de más fama.
-
-\subsection{GitHub}
+\section{GitHub}
 GitHub es un servicio de alojamiento de repositorios de código basado en \textit{git}.
 
-Esta plataforma se ha utilizado para alojar el proyecto, gestionar las tareas mediante \textit{issues} y planificar \textit{sprints} mediante \textit{milestones}.
+Esta plataforma se ha utilizado para alojar el proyecto, gestionar las tareas mediante \textit{issues} y planificar \textit{sprints} mediante \textit{milestones}. El repositorio del proyecto se encuentra en \url{https://github.com/IvanBeke/TFM}.
 
-\subsection{Jupyter}
-\hrefFootnote{https://jupyter.org/}{Jupyter} es una plataforma, en formato de aplicación web, que permite desarrollar cuardernos que combinan texto y código. Desde ellos se puede ejecutar el código agrupado en celdas y ver la salida al mismo tiempo. Muy útil para realizar pruebas y mostrar resultados en tareas de análisis de datos.
+\section{Jupyter}
+\hrefFootnote{https://jupyter.org/}{Jupyter} es una plataforma, en formato de aplicación web, que permite desarrollar cuadernos que combinan texto y código. Desde ellos se puede ejecutar el código agrupado en celdas y ver la salida al mismo tiempo. Muy útil para realizar pruebas y mostrar resultados en tareas de análisis de datos.
 
-\subsection{Django}
-\hrefFootnote{https://www.djangoproject.com/}{Django} es un \textit{framework} para crear aplicaciones web escrito en \textit{Python} enfocado en el rápido desarrollo y facilitar gran parte del trabajo del desarrollo web.
+\section{Django}\label{django}
+\hrefFootnote{https://www.djangoproject.com/}{Django} es un \textit{framework} de Python para crear aplicaciones web enfocado al rápido desarrollo y a facilitar gran parte del trabajo de los pasos necesarios para obtener un producto o aplicación web.
 
-\subsection{MongoDB}
+\section{MLXtend}
+\hrefFootnote{http://rasbt.github.io/mlxtend/}{MLXtend} es una biblioteca de de aprendizaje automático que incluye herramientas útil para tareas de ciencia de datos. Se ha escogido para este proyecto por la facilidad que ofrece a la hora de preparar los datos y realizar el entrenamiento. Además incluye implementaciones de los algoritmos considerados para la resolución del problema.
+
+\section{Cassiopeia}
+\hrefFootnote{https://github.com/meraki-analytics/cassiopeia}{Cassiopeia} es una biblioteca que sirve de \textit{wrapper} para acceder a la API de Riot Games. Permite acceder a los datos mediante creación de objetos. Usa \textit{lazy loading} para evitar peticiones innecesarias y también incluye una \textit{cache} propia para evitar repetir peticiones recientes. Por último, incluye control de peticiones para no sobrepasar los límites de la clave.
+
+La razón principal para escogerla sobre otros \textit{wrappers} es su buena integración con \textit{Django} (ver sección~\ref{django}).
+
+\section{MongoDB}
 \hrefFootnote{https://www.mongodb.com/}{MongoDB} es una base de datos NoSQL de tipo documental. Permite almacenar datos cuya estructura sea similar a JSON. En el ámbito de \textit{Big Data} es muy útil por su escalabilidad y velocidad. Adicionalmente proporciona herramientas para facilitar el proceso de transformación de los datos.
 
 Se ha escogido esta plataforma porque da la posibilidad de guardar las respuestas en bruto de la API y, mediante agregaciones, poder realizar las transformaciones de datos necesarias de forma rápida y eficiente, además de poder cargarlos en la base de datos final.

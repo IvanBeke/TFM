@@ -8,17 +8,17 @@ En este apéndice se describen los objetivos generales de la aplicación y se de
 \begin{itemize}
     \item Desarrollar un proceso ETL que sea capaz de recopilar los datos necesarios usando la API oficial de Riot Games\footnote{Riot Games es la desarrolladora de League of Legends}.
 	\item Aplicar técnicas de aprendizaje no supervisado sobre los datos recopilados, en este caso algoritmos para la obtención de conjuntos frecuentes de objetos.
-	\item Ser capaz de obtener conocimiento útil a partir de los datos obtenidos.
+	\item Ser capaz de extraer conocimiento útil a partir de los datos obtenidos.
 	\item Desarrollar una aplicación en la que se pueda consultar el conocimiento extraído.
 	\item Que el producto final sea capaz de ayudar a los nuevos jugadores.
 \end{itemize}
 
-\section{Catalogo de requisitos}
+\section{Catálogo de requisitos}
 \subsection{Requisitos funcionales}
 \begin{itemize}
 	\item \textbf{RF-1 Proceso ETL}: la aplicación debe ser capaz de recopilar, transformar y almacenar los datos para sus posterior uso.
 	\begin{itemize}
-		\item \textbf{RF-1.1 Extracción de jugadores}: la aplicación debe ser extraer los jugadores de las ligas más altas.
+		\item \textbf{RF-1.1 Extracción de jugadores}: la aplicación debe poder extraer los jugadores de las ligas más altas.
 		\item \textbf{RF-1.2 Extracción de partidas}: la aplicación debe extraer las partidas de los jugadores obtenidos previamente.
 		\item \textbf{RF-1.3 Generación de transacciones}: la aplicación debe transformar los datos de partidas en listados de objetos agrupados por campeón.
 		\item \textbf{RF-1.4 Generación de conjuntos frecuentes}: la aplicación debe generar conjuntos frecuentes de objetos usando las transacciones obtenidas anteriormente.
