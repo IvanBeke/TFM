@@ -44,20 +44,55 @@ Por ello, desde el inicio del proyecto se decidió que el sistema tendría que c
 Para lograr el objetivo propuesto se guarda de forma periódica el estado de ejecución, serializando múltiples variables de control. En caso de que el proceso se detenga el estado previo de ejecución está guardado. Ahora, una vez reiniciada la ejecución, las variables que han sido guardadas previamente no se declaran como variables normales, si no que se comprueba si existe una serialización para ellas, en caso afirmativo se cargan y la ejecución contunúa a partir del punto cargado. En caso de que no exista un estado guardado, se asigna un valor inicial a las variables y el proceso empezaría de cero.
 
 \section{Proceso de recopilación y entrenamiento}
-En esta sección se va a explicar las fases del proceso de recopilación de datos y cómo ha llevado a cabo la recopilación de los mismos, además de su transformación y entrenamiento final.
+En esta sección se va a explicar las fases del proceso de recopilación de datos y cómo ha llevado a cabo el proceso, además de su transformación y entrenamiento final.
 
 \subsection{Extracción jugadores}
-\subsection{Extracción de partidas}
-\subsection{Añadir posición}
-\subsection{Generar transacciones}
-\subsection{Generar conjuntos frecuentes}
+Con las peticiones que están disponibles en el API no existen formas de obtener jugadores de forma directa, hay que hacerlo a través de las ligas. Esta forma de obtener jugadores es ventajosa para este caso en concreto, ya que el objetivo final es la extracción del conocimiento de los jugadores más expertos.
 
+Las ligas de las que se van a obtener los jugadores son Aspirante, Gran Maestro, Maestro y Diamante I. La respuesta que se obtiene contiene un listado de los jugadores presentes en esas ligas, sin embargo, para poder obtener partidas, se necesita usar el identificador de la cuenta, que no está presente en esta respuesta.
+
+El siguiente paso de esta fase es obtener ese identificador. A partir del nombre de jugador es posible obtener el identificador de cuenta en otra petición. Por ello, antes de guardar los jugadores, se obtiene el identificador de cuenta para cada uno, se junta con los datos previos y, finalmente, se guarda todo en una colección de \textit{MongoDB}.
+
+Este proceso tardó unas dos horas aproximadamente y recopiló  jugadores.
+TODO: en linux mirar los jugadores exactos.
+
+\subsection{Extracción de partidas}
+Partiendo de los jugadores obtenidos en la fase anterior, se puede obtener sus partidas, el tipo de dato principal sobre el que se va a trabajar en las siguientes fases.
+
+Para obtenerlas, el primer paso es traer desde base de datos los jugadores guardados en la fase anterior. Para cada uno, se consultan en la fuente de datos las últimas 20 partidas que ha jugado. Se ha escogido este número para obtener partidas de todos los jugadores teniendo en cuenta el límite de peticiones que se pueden realizar, y para asegurar que en la información final presentada a los usuarios hay datos recientes.
+
+Cada partida se guarda en base de datos comprobando que no está guardada ya. Al haber diez jugadores por partida, es muy probable que varios de los jugadores hayan coincidido y aparezca la misma partida en varios historiales. Es muy importante para asegurar la calidad final que no aparezcan partidas repetidas, ya que el porcentaje de aparación de cada objetos estaría adulterado.
+
+TODO: mirar número exacto de partidas guardas, cuatro días de recopilación, no terminó el proceso
+
+\subsection{Añadir posición}
+Esta sección podría aparecer como una subsección en el apartado anterior, pero por como se introdujo en el desarrollo se estima que es mejor que aparezca independientemente.
+
+Inicialmente solo se generaban transacciones en base al campeón, sin tener en cuenta la posición en la que se jugaba. Aunque para un gran número de campeones no es relevante la posición en la que se juega, hay varios en los que los objetos sufren variaciones notables. Por ello se optó por agrupar usando tanto campeón como posición.
+
+En los datos en bruto de cada partida no existe un valor que indique la posición exacta, pero sí hay varios atributos que pueden ayudar a identificarla. Esta fase se encarga de hacer una transformación en la que, a partir del campeón escogido, los campeones aliados y el rol de cada uno, crea un campo nuevo con la posición exacta para esa partida.
+
+\subsection{Generar transacciones}
+En esta fase se lleva a cabo la tranformación de los datos en bruto, en datos que poder suministrar al algoritmo para la obtención de conocimiento. Esta etapa del procesamiento se realiza integramente usando agregaciones de MongoDB.
+
+En los datos en bruto de partidas los atributos que interesan para el problema son los objetos con los que se ha terminado la partida. El primer paso para generar las transacciones (conjunto de objetos comprados) es juntar los objetos en un conjunto.
+
+A continuación, usando el campeón y la posición como claves, se agrupan los conjuntos de objetos del paso en anterior en una lista de conjuntos, de esta forma ya están localizados en un mismo documentos el campeón, la posición y las transacciones. Por último, el resultado se guarda en otra colección en base de datos. La salida de esta fase son los datos de entrada para el algoritmo de aprendizaje no supervisado.
+TODO: añadir tiempo
+
+\subsection{Generar conjuntos frecuentes}
+Para terminar con el proceso se tiene la generación de conjuntos frecuentes. Para ello se obtienen las transacciones generadas en el paso anterior y se ejecuta el algoritmo para cada grupo (campeón y posición). Una vez obtenido el resultado, cada conjunto de objetos se ordena en función de su coste de oro (descendiente) dentro del juego, y se carga en la base de datos que va a consultar la aplicación.
+
+Se ha optado por ordenar usando el coste del objeto porque de forma general, cuanto más caro sea un objeto, más aporta a la estadísticas del campeón y más ventaja proporciona dentro de la partida.
+
+TODO: tabla con tiempos ejecución
 
 \section{Elección del algoritmo}
 Como se ha comentado anteriormente, para la resolución del problema se va a usar un algoritmo para obtención de conjuntos de elementos frecuentes.
 
-El listado de algoritmos\cite{chee_jaafar_aziz_hasan_yeoh_2018} que son capaces de resolver este problema es extenso, sin embargo, por tener conocimiento previo tanto del Apriori, como del FP-Growth al haber sido tratados durante el máster, se ha optado por acotar la decisión a estos. Adicionalmente, estos son los que generalmente suelen recomendarse y los que se encuentran implementados en varias bibliotecas de aprendizaje automático.
+El listado de algoritmos \cite{chee_jaafar_aziz_hasan_yeoh_2018} que son capaces de resolver este problema es extenso, sin embargo, por tener conocimiento previo tanto del Apriori, como del FP-Growth al haber sido tratados durante el máster, se ha optado por acotar la decisión a estos. Adicionalmente, estos son los que generalmente suelen recomendarse y los que se encuentran implementados en varias bibliotecas de aprendizaje automático.
 
-En base a artículos existentes\cite{chonyy_2020_apriori}\cite{chonyy_2020_fpgrowth} se decidió usar FP-Growth en vez del Apriori por ser más rápido y requerir menos memoria. Por lo que durante el desarrollo del proyecto se usó ese algoritmo en las pruebas iniciales y después de realizar la recopilación de datos.
+En base a artículos existentes \cite{chonyy_2020_apriori}\cite{chonyy_2020_fpgrowth} se decidió usar FP-Growth en vez del Apriori por ser más rápido y requerir menos memoria. Por lo que durante el desarrollo del proyecto se usó ese algoritmo en las pruebas iniciales y después de realizar la recopilación de datos.
 
 Sin embargo, con los datos finales ocurría que el Apriori finalizaba su ejecución más rápido con el FP-Growth, por lo que finalmente se ha decidido dejar este algoritmo como el definitivo para la generación de conjuntos frecuentes.
+
