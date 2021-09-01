@@ -53,8 +53,7 @@ Las ligas de las que se van a obtener los jugadores son Aspirante, Gran Maestro,
 
 El siguiente paso de esta fase es obtener ese identificador. A partir del nombre de jugador es posible obtener el identificador de cuenta en otra petición. Por ello, antes de guardar los jugadores, se obtiene el identificador de cuenta para cada uno, se junta con los datos previos y, finalmente, se guarda todo en una colección de \textit{MongoDB}.
 
-Este proceso tardó unas dos horas aproximadamente y recopiló  jugadores.
-TODO: en linux mirar los jugadores exactos.
+Este proceso tardó entre dos y tres horas y recopiló 15.572 jugadores.
 
 \subsection{Extracción de partidas}
 Partiendo de los jugadores obtenidos en la fase anterior, se puede obtener sus partidas, el tipo de dato principal sobre el que se va a trabajar en las siguientes fases.
@@ -63,7 +62,7 @@ Para obtenerlas, el primer paso es traer desde base de datos los jugadores guard
 
 Cada partida se guarda en base de datos comprobando que no está guardada ya. Al haber diez jugadores por partida, es muy probable que varios de los jugadores hayan coincidido y aparezca la misma partida en varios historiales. Es muy importante para asegurar la calidad final que no aparezcan partidas repetidas, ya que el porcentaje de aparación de cada objetos estaría adulterado.
 
-TODO: mirar número exacto de partidas guardas, cuatro días de recopilación, no terminó el proceso
+Debido al número elevado de jugadores el proceso se paró manualmente antes de completarse, se mantuvo en ejecución durante cuatro días y se almacenaron 142.438 partidas.
 
 \subsection{Añadir posición}
 Esta sección podría aparecer como una subsección en el apartado anterior, pero por como se introdujo en el desarrollo se estima que es mejor que aparezca independientemente.
@@ -73,19 +72,20 @@ Inicialmente solo se generaban transacciones en base al campeón, sin tener en c
 En los datos en bruto de cada partida no existe un valor que indique la posición exacta, pero sí hay varios atributos que pueden ayudar a identificarla. Esta fase se encarga de hacer una transformación en la que, a partir del campeón escogido, los campeones aliados y el rol de cada uno, crea un campo nuevo con la posición exacta para esa partida.
 
 \subsection{Generar transacciones}
-En esta fase se lleva a cabo la tranformación de los datos en bruto, en datos que poder suministrar al algoritmo para la obtención de conocimiento. Esta etapa del procesamiento se realiza integramente usando agregaciones de MongoDB.
+En esta fase se lleva a cabo la transformación de los datos en bruto, en datos que poder suministrar al algoritmo para la obtención de conocimiento. Esta etapa del procesamiento se realiza íntegramente usando agregaciones de MongoDB.
 
 En los datos en bruto de partidas los atributos que interesan para el problema son los objetos con los que se ha terminado la partida. El primer paso para generar las transacciones (conjunto de objetos comprados) es juntar los objetos en un conjunto.
 
 A continuación, usando el campeón y la posición como claves, se agrupan los conjuntos de objetos del paso en anterior en una lista de conjuntos, de esta forma ya están localizados en un mismo documentos el campeón, la posición y las transacciones. Por último, el resultado se guarda en otra colección en base de datos. La salida de esta fase son los datos de entrada para el algoritmo de aprendizaje no supervisado.
-TODO: añadir tiempo
+
+Al realizarse, completamente con operaciones de la base de datos esta fase es rápida en comparación a las anteriores. Es capaz de realizar la transformación de todas las partidas en un tiempo localizado entre 15 y 20 segundos.
 
 \subsection{Generar conjuntos frecuentes}
 Para terminar con el proceso se tiene la generación de conjuntos frecuentes. Para ello se obtienen las transacciones generadas en el paso anterior y se ejecuta el algoritmo para cada grupo (campeón y posición). Una vez obtenido el resultado, cada conjunto de objetos se ordena en función de su coste de oro (descendiente) dentro del juego, y se carga en la base de datos que va a consultar la aplicación.
 
 Se ha optado por ordenar usando el coste del objeto porque de forma general, cuanto más caro sea un objeto, más aporta a la estadísticas del campeón y más ventaja proporciona dentro de la partida.
 
-TODO: tabla con tiempos ejecución
+La generación de los conjuntos frecuentes tarda 10 segundos aproximadamente.
 
 \section{Elección del algoritmo}
 Como se ha comentado anteriormente, para la resolución del problema se va a usar un algoritmo para obtención de conjuntos de elementos frecuentes.
@@ -94,5 +94,19 @@ El listado de algoritmos \cite{chee_jaafar_aziz_hasan_yeoh_2018} que son capaces
 
 En base a artículos existentes \cite{chonyy_2020_apriori}\cite{chonyy_2020_fpgrowth} se decidió usar FP-Growth en vez del Apriori por ser más rápido y requerir menos memoria. Por lo que durante el desarrollo del proyecto se usó ese algoritmo en las pruebas iniciales y después de realizar la recopilación de datos.
 
-Sin embargo, con los datos finales ocurría que el Apriori finalizaba su ejecución más rápido con el FP-Growth, por lo que finalmente se ha decidido dejar este algoritmo como el definitivo para la generación de conjuntos frecuentes.
+Sin embargo, con los datos finales ocurría que el Apriori finalizaba su ejecución más rápido que usando FP-Growth (var tabla~\ref{tab:tiempo-algos}), por lo que finalmente se ha decidido dejar este algoritmo como el definitivo para la generación de conjuntos frecuentes.
 
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ll}\toprule
+		\textbf{Apriori} & \textbf{FP-Growth} \\
+		\midrule
+		9,88s   & 13,14s    \\
+		10,37s  & 13,55s    \\
+		9,98s   & 13,38s    \\
+		10,74s  & 13,43s    \\
+		10,19s  & 13,47s    \\ \bottomrule
+	\end{tabular}
+	\caption{Tiempo de ejecución de los algoritmos}
+	\label{tab:tiempo-algos}
+\end{table}
