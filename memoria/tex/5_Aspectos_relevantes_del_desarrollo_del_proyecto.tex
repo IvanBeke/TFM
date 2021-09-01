@@ -41,10 +41,10 @@ Como se ha explicado en la sección anterior (\ref{sec:rate-limit}), la recopila
 
 Por ello, desde el inicio del proyecto se decidió que el sistema tendría que contar con medios para que, en caso de fallos imprevistos, el proceso debería ser capaz de continuar la ejecución como si no hubiera ocurrido ningún fallo.
 
-Para lograr el objetivo propuesto se guarda de forma periódica el estado de ejecución, serializando múltiples variables de control. En caso de que el proceso se detenga el estado previo de ejecución está guardado. Ahora, una vez reiniciada la ejecución, las variables que han sido guardadas previamente no se declaran como variables normales, si no que se comprueba si existe una serialización para ellas, en caso afirmativo se cargan y la ejecución contunúa a partir del punto cargado. En caso de que no exista un estado guardado, se asigna un valor inicial a las variables y el proceso empezaría de cero.
+Para lograr el objetivo propuesto se guarda de forma periódica el estado de ejecución, serializando múltiples variables de control. En caso de que el proceso se detenga el estado previo de ejecución está guardado. Ahora, una vez reiniciada la ejecución, las variables que han sido guardadas previamente no se declaran como variables normales, si no que se comprueba si existe una serialización para ellas, en caso afirmativo se cargan y la ejecución continúa a partir del punto cargado. En caso de que no exista un estado guardado, se asigna un valor inicial a las variables y el proceso empezaría de cero.
 
 \section{Proceso de recopilación y entrenamiento}
-En esta sección se va a explicar las fases del proceso de recopilación de datos y cómo ha llevado a cabo el proceso, además de su transformación y entrenamiento final.
+En esta sección se va a explicar las fases del proceso de recopilación de datos y cómo se ha llevado a cabo el proceso, además de su transformación y entrenamiento final.
 
 \subsection{Extracción jugadores}
 Con las peticiones que están disponibles en el API no existen formas de obtener jugadores de forma directa, hay que hacerlo a través de las ligas. Esta forma de obtener jugadores es ventajosa para este caso en concreto, ya que el objetivo final es la extracción del conocimiento de los jugadores más expertos.
@@ -58,9 +58,9 @@ Este proceso tardó entre dos y tres horas y recopiló 15.572 jugadores.
 \subsection{Extracción de partidas}
 Partiendo de los jugadores obtenidos en la fase anterior, se puede obtener sus partidas, el tipo de dato principal sobre el que se va a trabajar en las siguientes fases.
 
-Para obtenerlas, el primer paso es traer desde base de datos los jugadores guardados en la fase anterior. Para cada uno, se consultan en la fuente de datos las últimas 20 partidas que ha jugado. Se ha escogido este número para obtener partidas de todos los jugadores teniendo en cuenta el límite de peticiones que se pueden realizar, y para asegurar que en la información final presentada a los usuarios hay datos recientes.
+Para obtenerlas, el primer paso es traer desde base de datos los jugadores guardados en la fase anterior. Para cada uno, se consultan en la fuente de datos las 20 partidas más recuentes que ha jugado. Se ha escogido este número para obtener partidas de todos los jugadores teniendo en cuenta el límite de peticiones que se pueden realizar, y para asegurar que en la información final presentada a los usuarios hay datos recientes.
 
-Cada partida se guarda en base de datos comprobando que no está guardada ya. Al haber diez jugadores por partida, es muy probable que varios de los jugadores hayan coincidido y aparezca la misma partida en varios historiales. Es muy importante para asegurar la calidad final que no aparezcan partidas repetidas, ya que el porcentaje de aparación de cada objetos estaría adulterado.
+Cada partida se guarda en la base de datos comprobando que no está guardada ya. Al haber diez jugadores por partida, es muy probable que varios de los jugadores hayan coincidido y aparezca la misma partida en varios historiales. Es muy importante para asegurar la calidad final que no aparezcan partidas repetidas, ya que el porcentaje de aparación de cada objetos estaría adulterado.
 
 Debido al número elevado de jugadores el proceso se paró manualmente antes de completarse, se mantuvo en ejecución durante cuatro días y se almacenaron 142.438 partidas.
 
