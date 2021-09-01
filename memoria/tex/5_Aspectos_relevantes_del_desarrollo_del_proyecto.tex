@@ -60,7 +60,7 @@ Partiendo de los jugadores obtenidos en la fase anterior, se puede obtener sus p
 
 Para obtenerlas, el primer paso es traer desde base de datos los jugadores guardados en la fase anterior. Para cada uno, se consultan en la fuente de datos las 20 partidas más recuentes que ha jugado. Se ha escogido este número para obtener partidas de todos los jugadores teniendo en cuenta el límite de peticiones que se pueden realizar, y para asegurar que en la información final presentada a los usuarios hay datos recientes.
 
-Cada partida se guarda en la base de datos comprobando que no está guardada ya. Al haber diez jugadores por partida, es muy probable que varios de los jugadores hayan coincidido y aparezca la misma partida en varios historiales. Es muy importante para asegurar la calidad final que no aparezcan partidas repetidas, ya que el porcentaje de aparación de cada objetos estaría adulterado.
+Cada partida se guarda en la base de datos comprobando que no está guardada ya. Al haber diez jugadores por partida, es muy probable que varios de los jugadores hayan coincidido y aparezca la misma partida en varios historiales. Es muy importante para asegurar la calidad final que no aparezcan partidas repetidas, ya que el porcentaje de aparición de cada objeto estaría adulterado.
 
 Debido al número elevado de jugadores el proceso se paró manualmente antes de completarse, se mantuvo en ejecución durante cuatro días y se almacenaron 142.438 partidas.
 
