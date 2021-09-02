@@ -60,7 +60,27 @@ El proyecto tiene dos partes diferenciadas en cuanto a desarrollo. La primera es
 
 \section{Manual del programador}
 \subsection{Notebooks}
+Como los \textit{notebooks} han sido usados para realizar pruebas y probar la \textit{pipeline}, se recomienda probar en los mismos cualquier modificación a realizar en la recopilación y transformación de los datos.
+
+También es recomendable usarlos para explorar los parámetros en las diversas peticiones a la API y sus respuestas.
+
 \subsection{Aplicación web}
+Al ser una una aplicación estándar de \textit{Django}, se necesita tener conocimiento sobre el \textit{framework}. Para cualquier duda consultar en su \hrefFootnote{https://docs.djangoproject.com/en/3.2/}{documentación}.
+
+En este apartado se explican de forma básica los conceptos del \textit{framework} y cómo se han aplicado en este desarrollo.
+
+Los proyectos escritos en \textit{Django} se organizan en los que llaman \textit{apps}. Cada \textit{app} representa cada módulo o servicio del proyecto, se componen de vistas y modelos propios e independientes del resto de \textit{apps}, aunque pueden integrarse para el correcto funcionamiento del proyecto. El producto desarrollado se compone de dos \textit{apps}, \textbf{betterbuilds} y \textbf{etl}.
+
+La \textit{app} betterbuils contiene las vistas y modelos que se encargan de pedir y mostrar los datos necesarios en el navegador. Esto incluye la pantalla de inicio, el listado de campeones y la ficha del campeón. Sería la aplicación web comúnmente hablando.
+
+Dentro de la \textit{app} etl se encuentran las distintas fases de la \textit{pipeline} codificadas como comandos de gestión del proyecto. Los comandos de gestión se ejecutan desde el terminal y funcionan como si se tratase de la ejecución de un \textit{script}. Para cada fase de la \textit{pipeline} existe un comando que la realiza de principio a fin. La relación entre los distintos comandos y la fase es la siguiente:
+\begin{description}
+	\item[Extracción de jugadores:] \code{import\_summoners.py}
+	\item[Extracción de partidas:] \code{import\_matches.py}
+	\item[Añadir posición:] \code{add\_position.py}
+	\item[Generar transacciones:] \code{generate\_transactions.py}
+	\item[Generar conjuntos frecuentes:] \code{import\_frequent\_builds.py}
+\end{description}
 
 \section{Instalación y ejecución del proyecto}
 Dado que el proyecto se ha desarrollado usando el sistema operativo Ubuntu, las instrucciones de instalación están orientadas a ese sistema.
