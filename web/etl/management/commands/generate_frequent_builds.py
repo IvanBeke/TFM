@@ -32,7 +32,7 @@ class Command(BaseCommand):
             for itemset in result:
                 items = []
                 for item in itemset['itemsets']:
-                    items.append(cass.Item(id=item, locale='es_ES'))
+                    items.append(cass.Item(id=item, locale='es_ES', version='11.15.1'))
                 items.sort(key=lambda item:-item.gold.total)
                 items = list(map(lambda item: item.id, items))
                 builds.append({
