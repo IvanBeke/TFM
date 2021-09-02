@@ -100,11 +100,11 @@ El listado de algoritmos \cite{chee_jaafar_aziz_hasan_yeoh_2018} que son capaces
 
 En base a artículos existentes \cite{chonyy_2020_apriori, chonyy_2020_fpgrowth}se decidió usar FP-Growth en vez del Apriori por ser más rápido y requerir menos memoria. Por lo que, durante el desarrollo del proyecto, se usó ese algoritmo en las pruebas iniciales y después de realizar la recopilación de datos.
 
-Sin embargo, con los datos finales ocurría que el Apriori finalizaba su ejecución más rápido que usando FP-Growth (var tabla~\ref{tab:tiempo-algos}), por lo que finalmente se ha decidido dejar este algoritmo como el definitivo para la generación de conjuntos frecuentes.
+Sin embargo, con los datos finales ocurría que el Apriori finalizaba su ejecución más rápido que usando FP-Growth (ver tabla~\ref{tab:tiempo-algos}), por lo que finalmente se ha decidido dejar este algoritmo como el definitivo para la generación de conjuntos frecuentes.
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{ll}\toprule
+	\begin{tabular}{rl}\toprule
 		\textbf{Apriori} & \textbf{FP-Growth} \\
 		\midrule
 		9,88s   & 13,14s    \\
