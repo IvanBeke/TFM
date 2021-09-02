@@ -4,26 +4,26 @@
 
 
 \section{Problema encontrado y propuesta de solución}
-Como se ha podido observar en \ref{sec:lol-conceptos}, para cualquier persona que quiera empezar a jugar, existe una cantidad de información abrumadora que puede impedir disfrutar de la experiencia y crear frustaciones.
+Como se ha podido observar en \ref{sec:lol-conceptos}, para cualquier persona que quiera empezar a jugar, existe una cantidad de información abrumadora que puede impedir disfrutar de la experiencia y crear frustraciones.
 
-En primer lugar el gran número de campeones y sus habilidades hace que se tarde tiempo en aprender cómo manejar a los personajes. La siguiente dificultar es encontrar la mejor de combiación de objetos para cada campeón de forma que su utilidad dentro de la partida se maximice.
+En primer lugar el gran número de campeones y sus habilidades hace que se tarde tiempo en aprender cómo manejar a los personajes. La siguiente dificultad es encontrar la mejor de combinación de objetos para cada campeón de forma que su utilidad dentro de la partida se maximice.
 
-En segundo lugar, al disponer de un espacio limitado en el inventario la toma de decisión de que objetos comprar se complica.
+En segundo lugar, al disponer de un espacio limitado en el inventario, la toma de decisión de qué objetos comprar se complica.
 
 Para terminar, el juego está en constante evolución debido que cada dos semanas se realizan actualizaciones que modifican las estadísticas, los valores de las habilidades y la modificación de estadísticas de los objetos. Estos motivos pueden provocar que los objetos que han sido óptimos para un campeón dejen de ser viables con la actualización.
 
-Por estas razones, y sabiendo qué jugadores son los que mayor habilidad desmuestran en el juego gracias al sistema de ligas, se puede analizar el comportamiento de estos jugadores para obtener el conocimiento que poseen sobre el juego y ponerlo a disposición de los recién llegados.
+Por estas razones, y sabiendo qué jugadores son los que mayor habilidad demuestran en el juego, gracias al sistema de ligas, se puede analizar el comportamiento de estos jugadores para obtener el conocimiento que poseen sobre el juego y ponerlo a disposición de los recién llegados.
 
 Para ello se propone un sistema que sea capaz de analizar las partidas de los jugadores de más alto nivel y extraer el conocimiento que poseen. Este conocimiento será puesto a disposición de otros jugadores por medio de una aplicación web.
 
-Para realizar el análisis de partidas se va a usar aprendizaje no supervisado, en concreto algoritmos para la obtención de conjuntos de elementos frecuentes. Al partir de los datos de los jugadores de mayor habilidad, de forma indirecta, se debería obtener el conjunto de objetos más útil para cada campeón.
+Para realizar el análisis de partidas se va a usar aprendizaje no supervisado, en concreto algoritmos para la obtención de conjuntos de elementos frecuentes. A partir de los datos de los jugadores de mayor habilidad, de forma indirecta, se debería obtener el conjunto de objetos más útil para cada campeón.
 
 \section{Desarrollo de \textit{notebooks} y web}
-El desarrollo del proyecto ha tenido dos fases fácilmente diferenciadas, desarrollo de \textit{notebooks} y desarrollo de la aplicación web. A pesar de que pueda parecer que se ha hecho el mismo trabajo dos veces, esta metodología ha aportado grandes ventajas a lo largo del trabajo.
+El desarrollo del proyecto ha tenido dos fases claramente diferenciadas, desarrollo de \textit{notebooks} y desarrollo de la aplicación web. A pesar de que pueda parecer que se ha hecho el mismo trabajo dos veces, esta metodología ha aportado grandes ventajas a lo largo del trabajo.
 
 En primer lugar, el uso de \textit{notebooks} ha permitido realizar pruebas de forma rápida con la API y poder comprobar de forma ágil que los datos necesarios para el desarrollo estaban accesibles, al igual que, ya teniendo muestras de los datos, realizar varias ejecuciones de los algoritmos candidatos y evaluar sus resultados.
 
-En segundo lugar, al poder ejecutar fragmentos de código aislados se han podido identificar y solucionar varios problemas en la \textit{pipeline} (\ref{sec:rate-limit} y \ref{sec:fault-tolerance}) de forma rápida y sin que afecte al resto del desarrollo.
+En segundo lugar, al poder ejecutar fragmentos de código aislados se han podido identificar y solucionar varios problemas en la \textit{pipeline} (ver secciones~\ref{sec:rate-limit} y \ref{sec:fault-tolerance}) de forma rápida y sin que afecte al resto del desarrollo.
 
 Por último, esta forma de gestionar el desarrollo ha permitido que el desarrollo de la \textit{pipeline} integrada en la aplicación haya sido muy ágil. Además de que, como la mayoría de problemas se habían identificado en los \textit{notebooks}, el proceso final dentro la aplicación ha estado libre, casi al completo, de errores.
 
@@ -38,17 +38,17 @@ Al inicio del desarrollo se decidió usar retroceso exponencial. Esto es ir aume
 
 Más adelante se localizó en la documentación de la API que, cuando una petición se rechaza por haber sobrepasado el límite, la respuesta de esa petición fallida retornaba en una cabecera el tiempo de espera necesario para volver a obtener respuestas correctas.
 
-Se procedió a cambiar el restroceso exponencial por una espera única del tiempo indicado en la respuesta, haciendo que el proceso de recopilación fuera más limpio y minimizando las esperas, de tal forma que se pudo aumentar el ratio de obtención de datos.
+Se procedió a cambiar el retroceso exponencial por una espera única del tiempo indicado en la respuesta, haciendo que el proceso de recopilación fuera más limpio y minimizando las esperas, de tal forma que se pudo aumentar el ratio de obtención de datos.
 
 \section{Tolerancia y recuperación de fallos}\label{sec:fault-tolerance}
-Como se ha explicado en la sección anterior (\ref{sec:rate-limit}), la recopilación de datos ha sido temporalmente costoso. En el caso de que ocurriera un error mientras se ejecutase, el proceso empezaría de cero y se pedirían datos que ya estuvieran guardados, perdiendo tiempo valioso.
+Como se ha explicado en la sección \ref{sec:rate-limit}, la recopilación de datos ha sido temporalmente costoso. En el caso de que ocurriera un error mientras se ejecutase, el proceso empezaría de cero y se realizarían peticiones para datos que ya estuvieran guardados, perdiendo tiempo valioso.
 
 Por ello, desde el inicio del proyecto se decidió que el sistema tendría que contar con medios para que, en caso de fallos imprevistos, el proceso debería ser capaz de continuar la ejecución como si no hubiera ocurrido ningún fallo.
 
-Para lograr el objetivo propuesto se guarda de forma periódica el estado de ejecución, serializando múltiples variables de control. En caso de que el proceso se detenga el estado previo de ejecución está guardado. Ahora, una vez reiniciada la ejecución, las variables que han sido guardadas previamente no se declaran como variables normales, si no que se comprueba si existe una serialización para ellas, en caso afirmativo se cargan y la ejecución continúa a partir del punto cargado. En caso de que no exista un estado guardado, se asigna un valor inicial a las variables y el proceso empezaría de cero.
+Para lograr el objetivo propuesto se guarda de forma periódica el estado de ejecución, serializando múltiples variables de control. En caso de que el proceso se detenga, el estado previo de ejecución está guardado. Ahora, una vez reiniciada la ejecución, las variables que han sido guardadas previamente no se declaran como variables normales, si no que se comprueba si existe una serialización para ellas, en caso afirmativo se cargan y la ejecución continúa a partir del punto cargado. En caso de que no exista un estado guardado, se asigna un valor inicial a las variables y el proceso empezaría de cero.
 
 \section{Proceso de recopilación y entrenamiento}
-En esta sección se va a explicar las fases del proceso de recopilación de datos y cómo se ha llevado a cabo el proceso, además de su transformación y entrenamiento final.
+En esta sección se van a explicar las fases del proceso de recopilación de datos y cómo se ha llevado a cabo el proceso, además de su transformación y entrenamiento final.
 
 \subsection{Extracción jugadores}
 Con las peticiones que están disponibles en el API no existen formas de obtener jugadores de forma directa, hay que hacerlo a través de las ligas. Esta forma de obtener jugadores es ventajosa para este caso en concreto, ya que el objetivo final es la extracción del conocimiento de los jugadores más expertos.
@@ -62,30 +62,32 @@ Este proceso tardó entre dos y tres horas y recopiló 15.572 jugadores.
 \subsection{Extracción de partidas}
 Partiendo de los jugadores obtenidos en la fase anterior, se puede obtener sus partidas, el tipo de dato principal sobre el que se va a trabajar en las siguientes fases.
 
-Para obtenerlas, el primer paso es traer desde base de datos los jugadores guardados en la fase anterior. Para cada uno, se consultan en la fuente de datos las 20 partidas más recuentes que ha jugado. Se ha escogido este número para obtener partidas de todos los jugadores teniendo en cuenta el límite de peticiones que se pueden realizar, y para asegurar que en la información final presentada a los usuarios hay datos recientes.
+Para obtenerlas, el primer paso es traer desde la base de datos los jugadores guardados en la fase anterior. Para cada uno, se consultan en la fuente de datos las 20 partidas más recuentes que ha jugado. Se ha escogido este número para obtener partidas de todos los jugadores teniendo en cuenta el límite de peticiones que se pueden realizar, y para asegurar que en la información final presentada a los usuarios hay datos recientes.
 
 Cada partida se guarda en la base de datos comprobando que no está guardada ya. Al haber diez jugadores por partida, es muy probable que varios de los jugadores hayan coincidido y aparezca la misma partida en varios historiales. Es muy importante para asegurar la calidad final que no aparezcan partidas repetidas, ya que el porcentaje de aparición de cada objeto estaría adulterado.
 
 Debido al número elevado de jugadores el proceso se paró manualmente antes de completarse, se mantuvo en ejecución durante cuatro días y se almacenaron 142.438 partidas.
 
 \subsection{Añadir posición}
-Esta sección podría aparecer como una subsección en el apartado anterior, pero por como se introdujo en el desarrollo se estima que es mejor que aparezca independientemente.
+Esta sección podría aparecer como una subsección en el apartado anterior, pero, por como se introdujo en el desarrollo, se estima que es mejor que aparezca independientemente.
 
-Inicialmente solo se generaban transacciones en base al campeón, sin tener en cuenta la posición en la que se jugaba. Aunque para un gran número de campeones no es relevante la posición en la que se juega, hay varios en los que los objetos sufren variaciones notables. Por ello se optó por agrupar usando tanto campeón como posición.
+Inicialmente, solo se generaban transacciones en base al campeón, sin tener en cuenta la posición en la que se jugaba. Aunque para un gran número de campeones no es relevante la posición en la que se juega, hay varios en los que los objetos sufren variaciones notables. Por ello se optó por agrupar usando tanto campeón como posición.
 
-En los datos en bruto de cada partida no existe un valor que indique la posición exacta, pero sí hay varios atributos que pueden ayudar a identificarla. Esta fase se encarga de hacer una transformación en la que, a partir del campeón escogido, los campeones aliados y el rol de cada uno, crea un campo nuevo con la posición exacta para esa partida.
+En los datos en bruto de cada partida no existe un valor que indique la posición exacta, pero sí hay varios atributos que pueden ayudar a identificarla. Para ello se usan unos atributos que representan el rol del campeón y la línea en la que han jugado.
+
+Para las líneas en las que hay un único jugador, esta se convierte en la posición. Para la línea de \textit{bot} (en esta van dos jugadores) se mira el rol para obtener la posición correcta.
 
 \subsection{Generar transacciones}
 En esta fase se lleva a cabo la transformación de los datos en bruto, en datos que poder suministrar al algoritmo para la obtención de conocimiento. Esta etapa del procesamiento se realiza íntegramente usando agregaciones de MongoDB.
 
-En los datos en bruto de partidas los atributos que interesan para el problema son los objetos con los que se ha terminado la partida. El primer paso para generar las transacciones (conjunto de objetos comprados) es juntar los objetos en un conjunto.
+En los datos en bruto de partidas, los atributos que interesan para el problema son los objetos con los que se ha terminado la partida. El primer paso para generar las transacciones (conjunto de objetos comprados) es juntar los objetos en un conjunto.
 
-A continuación, usando el campeón y la posición como claves, se agrupan los conjuntos de objetos del paso en anterior en una lista de conjuntos, de esta forma ya están localizados en un mismo documentos el campeón, la posición y las transacciones. Por último, el resultado se guarda en otra colección en base de datos. La salida de esta fase son los datos de entrada para el algoritmo de aprendizaje no supervisado.
+A continuación, usando el campeón y la posición como claves, se agrupan los conjuntos de objetos del paso en anterior en una lista de conjuntos, de esta forma ya están localizados en un mismo documentos el campeón, la posición y las transacciones. Por último, el resultado se guarda en otra colección en la base de datos. La salida de esta fase son los datos de entrada para el algoritmo de aprendizaje no supervisado.
 
 Al realizarse, completamente con operaciones de la base de datos esta fase es rápida en comparación a las anteriores. Es capaz de realizar la transformación de todas las partidas en un tiempo localizado entre 15 y 20 segundos.
 
 \subsection{Generar conjuntos frecuentes}
-Para terminar con el proceso se tiene la generación de conjuntos frecuentes. Para ello se obtienen las transacciones generadas en el paso anterior y se ejecuta el algoritmo para cada grupo (campeón y posición). Una vez obtenido el resultado, cada conjunto de objetos se ordena en función de su coste de oro (descendiente) dentro del juego, y se carga en la base de datos que va a consultar la aplicación.
+Para terminar con el proceso, se tiene la generación de conjuntos frecuentes. Para ello se obtienen las transacciones generadas en el paso anterior y se ejecuta el algoritmo para cada grupo (campeón y posición). Una vez obtenido el resultado, cada conjunto de objetos se ordena en función de su coste de oro (descendiente) dentro del juego, y se carga en la base de datos que va a consultar la aplicación.
 
 Se ha optado por ordenar usando el coste del objeto porque de forma general, cuanto más caro sea un objeto, más aporta a la estadísticas del campeón y más ventaja proporciona dentro de la partida.
 
@@ -94,9 +96,9 @@ La generación de los conjuntos frecuentes tarda 10 segundos aproximadamente.
 \section{Elección del algoritmo}
 Como se ha comentado anteriormente, para la resolución del problema se va a usar un algoritmo para obtención de conjuntos de elementos frecuentes.
 
-El listado de algoritmos \cite{chee_jaafar_aziz_hasan_yeoh_2018} que son capaces de resolver este problema es extenso, sin embargo, por tener conocimiento previo tanto del Apriori, como del FP-Growth al haber sido tratados durante el máster, se ha optado por acotar la decisión a estos. Adicionalmente, estos son los que generalmente suelen recomendarse y los que se encuentran implementados en varias bibliotecas de aprendizaje automático.
+El listado de algoritmos \cite{chee_jaafar_aziz_hasan_yeoh_2018} que son capaces de resolver este problema es extenso, sin embargo, por tener conocimiento previo tanto del Apriori, como del FP-Growth, al haber sido tratados durante el máster, se ha optado por acotar la decisión a estos. Adicionalmente, estos son los que generalmente suelen recomendarse y los que se encuentran implementados en varias bibliotecas de aprendizaje automático.
 
-En base a artículos existentes \cite{chonyy_2020_apriori}\cite{chonyy_2020_fpgrowth} se decidió usar FP-Growth en vez del Apriori por ser más rápido y requerir menos memoria. Por lo que durante el desarrollo del proyecto se usó ese algoritmo en las pruebas iniciales y después de realizar la recopilación de datos.
+En base a artículos existentes \cite{chonyy_2020_apriori, chonyy_2020_fpgrowth}se decidió usar FP-Growth en vez del Apriori por ser más rápido y requerir menos memoria. Por lo que, durante el desarrollo del proyecto, se usó ese algoritmo en las pruebas iniciales y después de realizar la recopilación de datos.
 
 Sin embargo, con los datos finales ocurría que el Apriori finalizaba su ejecución más rápido que usando FP-Growth (var tabla~\ref{tab:tiempo-algos}), por lo que finalmente se ha decidido dejar este algoritmo como el definitivo para la generación de conjuntos frecuentes.
 
