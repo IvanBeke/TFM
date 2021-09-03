@@ -160,7 +160,53 @@ Desde 26/08/2021 hasta 03/09/2021.
 \section{Estudio de viabilidad}
 
 \subsection{Viabilidad económica}
+\subsubsection{Costes de personal}
+El proyecto se ha llevado a cabo por un desarrollador contratado a tiempo parcial durante 3 meses. Se considera un salario neto de 1.000€ mensuales
+(ver tabla~\ref{tab:personal}).
+
+La cotización a la seguridad social se ha calculado como horas comunes, según
+el régimen general de 2018 (28,30\%)~\cite{seguridad-social}.
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{ll}
+		\toprule
+		\textbf{Concepto} & \textbf{Coste} \\
+		\midrule
+		Salario neto & 1000€\\
+		Retención IRPF (19 \%) & 360,53€ \\
+		Seguridad social (28,30 \%) & 537,00€ \\
+		\midrule
+		Salario bruto (mensual) & 1897,53€ \\
+		\midrule
+		\textbf{Total 3 meses} & 5692,69€ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Costes de personal}
+	\label{tab:personal}
+\end{table}
 
 \subsection{Viabilidad legal}
+A lo hora de añadir una licencia al proyecto hay que tener en cuenta a que licencias están sometidas las dependencias. En la tabla~\ref{tab:dependencias} se listan las dependencias del proyecto y su licencia.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ll}\toprule
+		\textbf{Dependencia}         & \textbf{Licencia}     \\ \midrule
+		django              & BSD          \\
+		cassiopeia          & MIT          \\
+		ipython             & BSD 3-Clause \\
+		django-cassiopeia   & MIT          \\
+		django-extensions   & MIT          \\
+		djongo              & AGPL-3.0     \\
+		role-identification & MIT          \\ \bottomrule
+	\end{tabular}
+	\caption{Tabla de dependencias}
+	\label{tab:dependencias}
+\end{table}
+
+De las dependencias usadas, todas son licencias bastante permisivas que permiten el uso con libertad, por lo que no tenemos que preocuparnos de incompatibilidades con la licencia que se escoja.
+
+Con ayuda de las recomendaciones GNU~\cite{gnu-choose}, se ha escogido la licencia GPL-3.0~\cite{gpl3}. Esta licencia permite la modificación, uso y distribución del software, siempre que esto se haga bajo la misma licencia, se indiquen los cambios y se mencione al autor original.
 
 

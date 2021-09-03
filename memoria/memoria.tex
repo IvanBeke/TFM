@@ -111,7 +111,7 @@
 %
 % Nuevo comando para tablas pequeñas (menos de una página).
 \newcommand{\tablaSmall}[5]{%
- \begin{table}
+ \begin{table}[h]
   \begin{center}
    \rowcolors {2}{gray!35}{}
    \begin{tabular}{#2}
@@ -330,18 +330,18 @@
 	% Cabecera ----------------
 	\begin{center}%
 		{\noindent\LARGE Universidades de Burgos, León y Valladolid}\vspace{.5cm}%
-		
+
 		{\noindent\large Máster universitario}\vspace{.5cm}%
-		
+
 		{\noindent\LARGE \textbf{Inteligencia de Negocio y Big~Data en Entornos Seguros}}\vspace{.5cm}%
 	\end{center}%
-	
+
 	\begin{center}%
 		\includegraphics[height=3cm]{img/escudoUBU} \hspace{1cm}
 		\includegraphics[height=3cm]{img/escudoUVA} \hspace{1cm}
 		\includegraphics[height=3cm]{img/escudoULE} \vspace{1cm}%
 	\end{center}%
-	
+
 	\vfill
 	% Título proyecto y escudo informática ----------------
 	\colorbox{cpardoBox}{%
@@ -353,7 +353,7 @@
 			\end{center}
 			\vspace{.2cm}
 		\end{minipage}
-		
+
 	}%
 	\vfill
 	% Datos de alumno, curso y tutores ------------------
