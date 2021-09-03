@@ -161,11 +161,11 @@ Desde 26/08/2021 hasta 03/09/2021.
 
 \subsection{Viabilidad económica}
 \subsubsection{Costes de personal}
-El proyecto se ha llevado a cabo por un desarrollador contratado a tiempo parcial durante 3 meses. Se considera un salario neto de 1.000€ mensuales
+El proyecto se ha llevado a cabo por un desarrollador contratado a tiempo parcial durante 3 meses. Se considera un salario neto de 1.610€ mensuales \cite{salario}.
 (ver tabla~\ref{tab:personal}).
 
 La cotización a la seguridad social se ha calculado como horas comunes, según
-el régimen general de 2018 (28,30\%)~\cite{seguridad-social}.
+el régimen general de 2021 (28,30\%)~\cite{seguridad-social}.
 
 \begin{table}[!h]
 	\centering
@@ -173,17 +173,71 @@ el régimen general de 2018 (28,30\%)~\cite{seguridad-social}.
 		\toprule
 		\textbf{Concepto} & \textbf{Coste} \\
 		\midrule
-		Salario neto & 1000,00€\\
-		Retención IRPF (19 \%) & 360,53€ \\
-		Seguridad social (28,30 \%) & 537,00€ \\
+		Salario neto & 1610,00€\\
+		Retención IRPF (17\%) & 500,37€ \\
+		Seguridad social (28,30 \%) & 832,96€ \\
 		\midrule
-		Salario bruto (mensual) & 1897,53€ \\
+		Salario bruto (mensual) & 2.943,33€ \\
 		\midrule
-		\textbf{Total 3 meses} & 5692,69€ \\
+		\textbf{Total 3 meses} & 8.829,99€ \\
 		\bottomrule
 	\end{tabular}
 	\caption{Costes de personal}
 	\label{tab:personal}
+\end{table}
+
+Además se sumará el sueldo de los dos tutores asignados al proyecto \cite{misc:retribuciontutores-funcionarios} durante 3 meses, ambos con la posición de Profesor Titular de Universidad. Se asignan 0,5 por tutor.
+
+Sueldo mensual: 3.145,59€. Imparte 24 créditos anuales.
+$$ \dfrac{\textup{3.145,59€} \times 12 \;meses}{24 
+	\;créditos} \times 0,5 \;créditos \times 2 \;tutores = \textup{1.572,80€} $$
+
+
+El coste de los tutores corresponde a 1.572,80€.
+
+\subsubsection{Costes de \textit{hardware}}
+En esta sección se enumeran los costes del \textit{hardware} usado durante el desarrollo.
+
+Para el desarrollo se ha usado un ordenador portátil valorado en 1400€, con 
+amortización en 4 años (ver tabla~\ref{tab:hardware}).
+
+$$\dfrac{\textup{1400€}}{4 \;años * 12 \;meses} = 
+\textup{29,17} $$
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{lrr}
+		\toprule
+		\textbf{Concepto} & \textbf{Coste} & \textbf{Amortización} \\
+		\midrule
+		Ordenador portátil & 1400€ & 29,17€ \\
+		\midrule
+		\textbf{Total 3 meses} & 87,51€ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Costes de hardware}
+	\label{tab:hardware}
+\end{table}
+
+\subsubsection{Costes totales}
+
+En la tabla~\ref{tab:total} se agrupan todos los costes calculados del proyecto, dando el total de €.
+
+\begin{table}[!h]
+	\centering
+	\begin{tabular}{lr}
+		\toprule
+		\textbf{Concepto} & \textbf{Coste} \\
+		\midrule
+		Personal & 8.829,99€ \\
+		Tutores  & 1.572,80€ \\
+		\textit{Hardware} & 87,51€ \\
+		\midrule
+		\textbf{Total} & 10.490,30€ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Costes totales del proyecto}
+	\label{tab:total}
 \end{table}
 
 \subsection{Viabilidad legal}
