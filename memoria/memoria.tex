@@ -14,6 +14,7 @@
 \usepackage{listings}
 \usepackage[hyphens]{url}
 \usepackage{booktabs}
+\usepackage{tabularx}
 
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
@@ -114,13 +115,13 @@
  \begin{table}[h]
   \begin{center}
    \rowcolors {2}{gray!35}{}
-   \begin{tabular}{#2}
+   \begin{tabularx}{\textwidth}{#2}
     \toprule
     #4
     \otoprule
     #5
     \bottomrule
-   \end{tabular}
+   \end{tabularx}
    \caption{#1}
    \label{tabla:#3}
   \end{center}
