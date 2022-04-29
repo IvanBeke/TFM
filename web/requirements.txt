@@ -1,5 +1,5 @@
 dill==0.3.4
-django==3.2.12
+django==3.2.13
 cassiopeia==4.0.18
 python-dotenv==0.18.0
 django-cassiopeia==2.1.0
